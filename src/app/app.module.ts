@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { PokemonService } from './service/pokemon.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,9 +14,10 @@ import { PokemonCardComponent } from './pokemon-card/pokemon-card.component';
     PokemonCardComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
   ],
-  providers: [PokemonService, HttpClient],
+  providers: [PokemonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

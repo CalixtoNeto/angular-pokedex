@@ -1,3 +1,5 @@
+import { Subscription } from 'rxjs';
+import { PokemonService } from './../service/pokemon.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokemonListComponent implements OnInit {
 
-  constructor() { }
+  loading: boolean = false;
 
+  constructor(private pokemonService: PokemonService) { }
+
+  get pokemons(): any[] {
+    return this.pokemonService.pokemons;
+  }
   ngOnInit(): void {
+    if (!this.pokemons.length) {
+      this.pokemonPagination()
+    }
   }
 
+  ngOnDestroy(): void {
+    this.pokemonService.unsubscribeALL()
+  }
+
+  pokemonPagination(): void {
+    this.pokemonService.fetchPokemons()
+  }
 }

@@ -1,1 +1,20 @@
-<p>pokemon-list works!</p>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-xl-8 offset-xl-2">
+      <div class="row">
+        <h1 class="mb-4">Pokedex</h1>
+        <div *ngFor="let pokemon of pokemons; let i = index" class="col-md-6">
+          <app-pokemon-card [pokemon]='pokemon'></app-pokemon-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm text-center">
+      <button class="btn btn-sm btn-secondary" (click)="pokemonPagination()">
+        <div class="spinner-border spinner-border-sm" role="status" *ngIf="loading"></div>
+        {{loading ? 'Carregando...' : 'Carregar mais Pokémon'}}
+      </button>
+    </div>
+  </div>
+</div>
