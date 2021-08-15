@@ -10,11 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class PokemonListComponent implements OnInit {
 
   loading: boolean = false;
+  public searchFilter: any = '';
+
 
   constructor(private pokemonService: PokemonService) { }
 
   get pokemons(): any[] {
     return this.pokemonService.pokemons;
+  }
+  get next(): string {
+    return this.pokemonService.next;
   }
   ngOnInit(): void {
     if (!this.pokemons.length) {
