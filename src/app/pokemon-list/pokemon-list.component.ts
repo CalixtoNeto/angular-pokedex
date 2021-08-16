@@ -1,6 +1,7 @@
 import { Subscription } from 'rxjs';
 import { PokemonService } from './../service/pokemon.service';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -18,12 +19,19 @@ export class PokemonListComponent implements OnInit {
   get pokemons(): any[] {
     return this.pokemonService.pokemons;
   }
+
+  get pokedex(): any[] {
+    return this.pokemonService.pokedex;
+  }
   get next(): string {
     return this.pokemonService.next;
   }
   ngOnInit(): void {
     if (!this.pokemons.length) {
-      this.pokemonPagination()
+      this.pokemonPagination(environment.URL_API_DEFAUT)
+    }
+    if (!this.pokedex.length) {
+      this.getRegion()
     }
   }
 
@@ -31,7 +39,12 @@ export class PokemonListComponent implements OnInit {
     this.pokemonService.unsubscribeALL()
   }
 
-  pokemonPagination(): void {
-    this.pokemonService.fetchPokemons()
+  pokemonPagination(url: string): void {
+    this.pokemonService.fetchPokemons(url)
+  }
+  getRegion(): void {
+    this.pokemonService.getRegion()
   }
 }
+
+

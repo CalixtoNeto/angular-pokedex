@@ -2,7 +2,15 @@
   <div class="row">
     <div class="col-xl-8 offset-xl-2">
       <div class="row">
-        <h1 class="mb-4">Pokedex</h1>
+        <h1 class="mb-4 " align="center">Pokedex</h1>
+        <div class="row mb-4 ">
+          <div class="col-sm margim text-center" align="center">
+            <button *ngFor="let region of pokedex" class="badge border rounded-pill me-1 bg-ice"
+              (click)="pokemonPagination(region.url)">
+              {{region.name.split('-').join(' ') | titlecase}}
+            </button>
+          </div>
+        </div>
         <div class="form-group">
           <input type="text" class="form-control mb-4" placeholder="Search" [(ngModel)]="searchFilter" id="listSearch">
         </div>
@@ -14,10 +22,7 @@
   </div>
   <div class="row">
     <div class="col-sm text-center">
-      <button *ngIf="next" class="btn btn-sm btn-secondary" (click)="pokemonPagination()">
-        <div class="spinner-border spinner-border-sm" role="status" *ngIf="loading"></div>
-        {{loading ? 'Carregando...' : 'Carregar mais Pokémon'}}
-      </button>
+
     </div>
   </div>
 </div>

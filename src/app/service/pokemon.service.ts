@@ -7,8 +7,10 @@ import { Pokemon } from '../models/pokemon';
   providedIn: 'root'
 })
 export class PokemonService {
-  private URL: string = environment.URL_API + 'pokemon/';
+  private URL: string = environment.URL_API_POKEMON;
+  private URL_POKEDEX: string = environment.URL_API_POKEDEX;
   private _pokemons: any[] = [];
+  private _pokedex: any[] = [];
   private subscriptions: Subscription[] = [];
   private _next: string = '';
 
@@ -17,6 +19,9 @@ export class PokemonService {
 
   get pokemons(): any[] {
     return this._pokemons;
+  }
+  get pokedex(): any[] {
+    return this._pokedex;
   }
 
   get next(): string {
@@ -39,9 +44,15 @@ export class PokemonService {
     const url = `${this.URL}${name}`;
     return this.httpService.get<any>(url);
   }
+  getRegion() {
+    this.httpService.get<any>(this.URL_POKEDEX).subscribe(region => {
+      this._pokedex = region.results;
+    });
+  }
 
-  getNext(): Observable<any> {
-    const url = this.next === '' ? `${this.URL}?limit=100` : this.next;
+  getNext(pokedex: string): Observable<any> {
+    // const url = this.next === '' ? `${pokedex}?limit=500` : this.next;
+    const url = `${pokedex}?limit=500`
     return this.httpService.get<any>(url);
   }
 
@@ -49,15 +60,17 @@ export class PokemonService {
     this.subscriptions.forEach(subscription => subscription ? subscription.unsubscribe() : 0);
   }
 
-  fetchPokemons() {
-    this.subscription = this.getNext().subscribe(pokemons => {
-      this.next = pokemons.next;
-      const details = pokemons.results.map((pokemon: Pokemon) => this.get(pokemon.name));
+  fetchPokemons(pokedex: string) {
+    this._pokemons = []
+    this.subscription = this.getNext(pokedex).subscribe(pokemons => {
+      // this.next = pokemons.next ? pokemons.next : '';
+      const details = pokemons.pokemon_entries.map((pokemon: any) => this.get(pokemon.pokemon_species.name));
       this.subscription = concat(...details).subscribe((response: any) => {
 
         this._pokemons.push(
           {
-            image: response.sprites.front_default,
+            image: `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${response.id.toString()
+              .padStart(3, '0')}.png`,
             number: response.id,
             name: response.name,
             types: response.types.map((types: any) => types.type.name),
