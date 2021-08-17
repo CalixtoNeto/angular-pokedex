@@ -60,7 +60,8 @@ export class PokemonService {
     this.subscriptions.forEach(subscription => subscription ? subscription.unsubscribe() : 0);
   }
 
-  fetchPokemons(pokedex: string) {
+  async fetchPokemons(pokedex: string) {
+    await this.unsubscribeALL()
     this._pokemons = []
     this.subscription = this.getNext(pokedex).subscribe(pokemons => {
       // this.next = pokemons.next ? pokemons.next : '';
