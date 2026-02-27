@@ -1,19 +1,20 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Pokemon } from '../models/pokemon';
 
 @Pipe({
-  name: 'searchFilter'
+  name: 'searchFilter',
 })
 export class SearchFilterPipe implements PipeTransform {
+  transform(value: Pokemon[] | null, args?: string): Pokemon[] {
+    if (!value) {
+      return [];
+    }
 
-  transform(value: any, args?: any): any {
-    if (!value) return null;
-    if (!args) return value;
+    if (!args) {
+      return value;
+    }
 
-    args = args.toLowerCase();
-
-    return value.filter(function (data: any) {
-      return JSON.stringify(data.name).toLowerCase().includes(args);
-    });
+    const normalizedTerm = args.toLowerCase().trim();
+    return value.filter((pokemon) => pokemon.name.toLowerCase().includes(normalizedTerm));
   }
-
 }
