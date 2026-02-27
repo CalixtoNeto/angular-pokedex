@@ -4,9 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Node.js version
 
-This repository pins Node.js `14.x` in `package.json` (`engines.node`) and `.nvmrc` to stay compatible with Angular 12 tooling.
+This repository pins Node.js `24.x` in `package.json` (`engines.node`) and `.nvmrc` to stay compatible with the Vercel Node.js 24 requirement.
 
-If you deploy on Vercel, set **Project Settings → Node.js Version** to `14.x` as well.
+If you deploy on Vercel, set **Project Settings → Node.js Version** to `24.x` as well.
 If project settings and `engines.node` diverge, Vercel will show a warning and force `engines.node`.
 
 ## Development server
