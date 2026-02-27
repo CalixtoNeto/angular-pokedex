@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-pokemon-list',
   templateUrl: './pokemon-list.component.html',
+  standalone: false,
   styleUrls: ['./pokemon-list.component.css']
 })
 export class PokemonListComponent implements OnInit {
