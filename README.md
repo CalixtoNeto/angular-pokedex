@@ -2,6 +2,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
 
+## Node.js version
+
+This repository pins Node.js `24.x` in `package.json` (`engines.node`) and `.nvmrc` to stay compatible with the Vercel Node.js 24 requirement.
+
+If you deploy on Vercel, set **Project Settings → Node.js Version** to `24.x` as well.
+If project settings and `engines.node` diverge, Vercel will show a warning and force `engines.node`.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

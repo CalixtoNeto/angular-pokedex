@@ -1,84 +1,82 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { concat, Observable, Subscription } from 'rxjs';
+import { Observable, Subject, from } from 'rxjs';
+import { map, mergeMap, takeUntil, toArray } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Pokemon } from '../models/pokemon';
+
+interface PokedexEntryResponse {
+  pokemon_entries: Array<{ pokemon_species: { name: string } }>;
+  results?: Array<{ name: string; url: string }>;
+}
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PokemonService {
-  private URL: string = environment.URL_API_POKEMON;
-  private URL_POKEDEX: string = environment.URL_API_POKEDEX;
-  private _pokemons: any[] = [];
-  private _pokedex: any[] = [];
-  private subscriptions: Subscription[] = [];
-  private _next: string = '';
+  private readonly URL = environment.URL_API_POKEMON;
+  private readonly URL_POKEDEX = environment.URL_API_POKEDEX;
+  private _pokemons: Pokemon[] = [];
+  private _pokedex: Array<{ name: string; url: string }> = [];
+  private readonly destroy$ = new Subject<void>();
 
+  constructor(private httpService: HttpClient) {}
 
-  constructor(private httpService: HttpClient) { }
-
-  get pokemons(): any[] {
+  get pokemons(): Pokemon[] {
     return this._pokemons;
   }
-  get pokedex(): any[] {
+
+  get pokedex(): Array<{ name: string; url: string }> {
     return this._pokedex;
   }
 
-  get next(): string {
-    return this._next;
-  }
-
-  set next(next: string) {
-    this._next = next;
-  }
-
-  set subscription(subscription: Subscription) {
-    this.subscriptions.push(subscription);
-  }
-
-  getType(pokemon: any): string {
+  getType(pokemon: { types: Array<{ type: { name: string } }> }): string {
     return pokemon && pokemon.types.length > 0 ? pokemon.types[0].type.name : '';
   }
 
   get(name: string): Observable<any> {
-    const url = `${this.URL}${name}`;
-    return this.httpService.get<any>(url);
-  }
-  getRegion() {
-    this.httpService.get<any>(this.URL_POKEDEX).subscribe(region => {
-      this._pokedex = region.results;
-    });
+    return this.httpService.get<any>(`${this.URL}${name}`);
   }
 
-  getNext(pokedex: string): Observable<any> {
-    // const url = this.next === '' ? `${pokedex}?limit=500` : this.next;
-    const url = `${pokedex}?limit=500`
-    return this.httpService.get<any>(url);
-  }
-
-  unsubscribeALL() {
-    this.subscriptions.forEach(subscription => subscription ? subscription.unsubscribe() : 0);
-  }
-
-  async fetchPokemons(pokedex: string) {
-    await this.unsubscribeALL()
-    this._pokemons = []
-    this.subscription = this.getNext(pokedex).subscribe(pokemons => {
-      // this.next = pokemons.next ? pokemons.next : '';
-      const details = pokemons.pokemon_entries.map((pokemon: any) => this.get(pokemon.pokemon_species.name));
-      this.subscription = concat(...details).subscribe((response: any) => {
-
-        this._pokemons.push(
-          {
-            image: `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${response.id.toString()
-              .padStart(3, '0')}.png`,
-            number: response.id,
-            name: response.name,
-            types: response.types.map((types: any) => types.type.name),
-            ...response
-          });
+  getRegion(): void {
+    this.httpService
+      .get<PokedexEntryResponse>(this.URL_POKEDEX)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((region) => {
+        this._pokedex = region.results ?? [];
       });
-    })
+  }
+
+  getNext(pokedex: string): Observable<PokedexEntryResponse> {
+    return this.httpService.get<PokedexEntryResponse>(`${pokedex}?limit=500`);
+  }
+
+  unsubscribeALL(): void {
+    this.destroy$.next();
+  }
+
+  fetchPokemons(pokedex: string): void {
+    this.unsubscribeALL();
+    this._pokemons = [];
+
+    this.getNext(pokedex)
+      .pipe(
+        map((response) => response.pokemon_entries ?? []),
+        mergeMap((entries) => from(entries)),
+        mergeMap((entry) => this.get(entry.pokemon_species.name), 20),
+        map((response: any) => ({
+          image: `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${response.id
+            .toString()
+            .padStart(3, '0')}.png`,
+          number: response.id,
+          name: response.name,
+          types: response.types,
+        } as Pokemon)),
+        toArray(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((pokemons) => {
+        this._pokemons = pokemons.sort((a, b) => a.number - b.number);
+      });
   }
 }
-
