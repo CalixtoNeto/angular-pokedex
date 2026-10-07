@@ -5,8 +5,8 @@
         <h1 class="mb-4 text-center">Pokedex</h1>
         <div class="row mb-4">
           <div class="col-sm text-center">
-            @for (region of store.regions(); track region.url) {
-              <button class="badge border rounded-pill me-1 bg-ice" (click)="store.selectRegion(region.url)">
+            @for (region of store.regions(); track region.id) {
+              <button class="badge border rounded-pill me-1 bg-ice" (click)="store.selectRegion(region.id)">
                 {{ region.label | titlecase }}
               </button>
             }

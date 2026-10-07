@@ -1,27 +1,26 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EMPTY, Observable, catchError, from, map, mergeMap, of, scan, switchMap } from 'rxjs';
+import { Pokemon, PokemonRepository, Region } from '@pokedex/domain';
 import { PokedexResponse, PokemonResponse, RegionListResponse } from './pokeapi.types';
-import { Pokemon, Region, toPokemon, toRegion } from '../pokedex/pokemon';
+import { toPokemon, toRegion } from './pokeapi.mappers';
 
 export const POKEAPI_URL = 'https://pokeapi.co/api/v2';
-export const REGIONS_URL = `${POKEAPI_URL}/pokedex/?offset=0&limit=100`;
-export const DEFAULT_REGION_URL = `${POKEAPI_URL}/pokedex/2/`;
+const REGIONS_URL = `${POKEAPI_URL}/pokedex/?offset=0&limit=100`;
 
-// Limite educado de pedidos simultâneos à PokeAPI; a versão antiga pedia um Pokémon por vez.
+// Limite educado de pedidos simultâneos à PokeAPI.
 const PARALLEL_REQUESTS = 6;
 
-@Injectable({ providedIn: 'root' })
-export class PokeApiClient {
+@Injectable()
+export class PokeApiPokemonRepository extends PokemonRepository {
   private readonly http = inject(HttpClient);
 
   regions(): Observable<Region[]> {
     return this.http.get<RegionListResponse>(REGIONS_URL).pipe(map(list => list.results.map(toRegion)));
   }
 
-  // Emite a lista a cada Pokémon que chega, sempre na ordem da Pokédex da região.
-  pokemonsOfRegion(regionUrl: string): Observable<Pokemon[]> {
-    return this.http.get<PokedexResponse>(regionUrl).pipe(
+  pokemonsOfRegion(regionId: string): Observable<Pokemon[]> {
+    return this.http.get<PokedexResponse>(`${POKEAPI_URL}/pokedex/${regionId}/`).pipe(
       map(pokedex => pokedex.pokemon_entries.map(entry => entry.pokemon_species.name)),
       switchMap(names => (names.length ? this.pokemonsInOrder(names) : of([]))),
     );

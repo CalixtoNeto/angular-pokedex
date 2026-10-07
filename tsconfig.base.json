@@ -1,0 +1,27 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "bundler",
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "es2020",
+    "strict": true,
+    "paths": {
+      "@pokedex/domain": [
+        "./libs/pokedex/domain/src/index.ts"
+      ],
+      "@pokedex/data-access": [
+        "./libs/pokedex/data-access/src/index.ts"
+      ],
+      "@pokedex/ui": [
+        "./libs/pokedex/ui/src/index.ts"
+      ],
+      "@pokedex/feature-list": [
+        "./libs/pokedex/feature-list/src/index.ts"
+      ]
+    }
+  }
+}

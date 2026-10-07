@@ -1,4 +1,4 @@
-import { toPokemon, toRegion } from './pokemon';
+import { toPokemon, toRegion } from './pokeapi.mappers';
 
 describe('toPokemon', () => {
   const bulbasaur = { id: 1, name: 'bulbasaur', types: [{ slot: 1, type: { name: 'grass' } }, { slot: 2, type: { name: 'poison' } }] };
@@ -14,8 +14,8 @@ describe('toPokemon', () => {
 });
 
 describe('toRegion', () => {
-  it('troca hífen por espaço no nome que aparece no botão', () => {
+  it('usa o nome da Pokédex como id e troca hífen por espaço no rótulo', () => {
     expect(toRegion({ name: 'original-johto', url: 'https://pokeapi.co/api/v2/pokedex/3/' }))
-      .toEqual({ label: 'original johto', url: 'https://pokeapi.co/api/v2/pokedex/3/' });
+      .toEqual({ id: 'original-johto', label: 'original johto' });
   });
 });

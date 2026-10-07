@@ -10,9 +10,9 @@ const REGIOES = [
 ];
 
 const POKEDEX: Record<string, string[]> = {
-  1: ['bulbasaur', 'chikorita'],
-  2: ['bulbasaur', 'ivysaur', 'charmander'],
-  3: ['chikorita', 'cyndaquil'],
+  national: ['bulbasaur', 'chikorita'],
+  kanto: ['bulbasaur', 'ivysaur', 'charmander'],
+  'original-johto': ['chikorita', 'cyndaquil'],
 };
 
 const POKEMON: Record<string, { id: number; tipos: string[]; atrasoMs: number }> = {
@@ -46,10 +46,10 @@ export async function simularPokeApi(page: Page): Promise<PokeApiFalsa> {
 
 async function responder(route: Route, falsa: PokeApiFalsa) {
   const url = new URL(route.request().url());
-  const regiao = url.pathname.match(/\/pokedex\/(\d+)\/$/)?.[1];
+  const regiao = url.pathname.match(/\/pokedex\/([a-z-]+)\/$/)?.[1];
   const pokemon = url.pathname.match(/\/pokemon\/([a-z-]+)$/)?.[1];
   if (url.pathname === '/api/v2/pokedex/') return route.fulfill({ json: { count: REGIOES.length, results: REGIOES } });
-  if (regiao) return route.fulfill({ json: { id: Number(regiao), pokemon_entries: POKEDEX[regiao].map(entrada) } });
+  if (regiao && POKEDEX[regiao]) return route.fulfill({ json: { name: regiao, pokemon_entries: POKEDEX[regiao].map(entrada) } });
   if (pokemon && POKEMON[pokemon]) {
     falsa.pedidosDeDetalhe.push(pokemon);
     await new Promise(r => setTimeout(r, POKEMON[pokemon].atrasoMs));

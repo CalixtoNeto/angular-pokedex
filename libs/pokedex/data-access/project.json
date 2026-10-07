@@ -1,0 +1,23 @@
+{
+  "name": "pokedex-data-access",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/pokedex/data-access/src",
+  "prefix": "app",
+  "projectType": "library",
+  "tags": [
+    "scope:pokedex",
+    "type:data-access"
+  ],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "buildTarget": "angular-pokedex:build:development",
+        "tsConfig": "libs/pokedex/data-access/tsconfig.spec.json"
+      }
+    }
+  }
+}

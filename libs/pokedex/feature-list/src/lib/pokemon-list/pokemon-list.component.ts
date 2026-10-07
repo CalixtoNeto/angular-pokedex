@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
-import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
-import { PokedexStore } from '../pokedex/pokedex.store';
+import { PokemonCardComponent } from '@pokedex/ui';
+import { PokedexStore } from '../pokedex.store';
 
 @Component({
   selector: 'app-pokemon-list',

@@ -1,16 +1,5 @@
-import { NamedResource, PokemonResponse } from '../pokeapi/pokeapi.types';
-
-export interface Pokemon {
-  id: number;
-  name: string;
-  image: string;
-  types: string[];
-}
-
-export interface Region {
-  label: string;
-  url: string;
-}
+import { Pokemon, Region } from '@pokedex/domain';
+import { NamedResource, PokemonResponse } from './pokeapi.types';
 
 const OFFICIAL_ARTWORK_URL = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail';
 
@@ -23,6 +12,6 @@ export function toPokemon(response: PokemonResponse): Pokemon {
   };
 }
 
-export function toRegion({ name, url }: NamedResource): Region {
-  return { label: name.replaceAll('-', ' '), url };
+export function toRegion({ name }: NamedResource): Region {
+  return { id: name, label: name.replaceAll('-', ' ') };
 }

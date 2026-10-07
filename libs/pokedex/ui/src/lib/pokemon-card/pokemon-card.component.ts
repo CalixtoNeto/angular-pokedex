@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
-import { Pokemon } from '../pokedex/pokemon';
+import { Pokemon } from '@pokedex/domain';
 
 @Component({
   selector: 'app-pokemon-card',

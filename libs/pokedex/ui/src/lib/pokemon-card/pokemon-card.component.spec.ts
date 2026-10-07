@@ -1,11 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { PokemonCardComponent } from './pokemon-card.component';
-import { toPokemon } from '../pokedex/pokemon';
+
+const BULBASAUR = {
+  id: 1,
+  name: 'bulbasaur',
+  image: 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
+  types: ['grass', 'poison'],
+};
 
 describe('PokemonCardComponent', () => {
   function render() {
     const fixture = TestBed.createComponent(PokemonCardComponent);
-    fixture.componentRef.setInput('pokemon', toPokemon({ id: 1, name: 'bulbasaur', types: [{ type: { name: 'grass' } }, { type: { name: 'poison' } }] }));
+    fixture.componentRef.setInput('pokemon', BULBASAUR);
     fixture.detectChanges();
     return fixture.nativeElement as HTMLElement;
   }
@@ -21,7 +27,7 @@ describe('PokemonCardComponent', () => {
   });
 
   it('carrega a imagem só quando ela chega perto da tela', () => {
-    const imagem = render().querySelector('img')!;
+    const imagem = render().querySelector('img') as HTMLImageElement;
     expect(imagem.getAttribute('loading')).toBe('lazy');
     expect(imagem.getAttribute('alt')).toBe('bulbasaur');
   });

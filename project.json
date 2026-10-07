@@ -79,12 +79,10 @@
       "options": {
         "buildTarget": "angular-pokedex:build"
       }
-    },
-    "test": {
-      "executor": "@angular/build:unit-test",
-      "options": {
-        "tsConfig": "tsconfig.spec.json"
-      }
     }
-  }
+  },
+  "tags": [
+    "scope:pokedex",
+    "type:app"
+  ]
 }
