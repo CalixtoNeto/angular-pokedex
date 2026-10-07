@@ -6,13 +6,14 @@ import {
   OnInit,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-pokemon-card',
   templateUrl: './pokemon-card.component.html',
   styleUrls: ['./pokemon-card.component.css'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  imports: [TitleCasePipe],
 })
 export class PokemonCardComponent implements OnInit {
   @Input() public pokemon: any;
