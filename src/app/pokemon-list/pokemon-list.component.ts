@@ -1,21 +1,20 @@
 import { Subscription } from 'rxjs';
 import { PokemonService } from './../service/pokemon.service';
-import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Component({
-    selector: 'app-pokemon-list',
-    templateUrl: './pokemon-list.component.html',
-    styleUrls: ['./pokemon-list.component.css'],
-    standalone: false
+  selector: 'app-pokemon-list',
+  templateUrl: './pokemon-list.component.html',
+  styleUrls: ['./pokemon-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false,
 })
 export class PokemonListComponent implements OnInit {
-
   loading: boolean = false;
   public searchFilter: any = '';
 
-
-  constructor(private pokemonService: PokemonService) { }
+  constructor(private pokemonService: PokemonService) {}
 
   get pokemons(): any[] {
     return this.pokemonService.pokemons;
@@ -29,23 +28,21 @@ export class PokemonListComponent implements OnInit {
   }
   ngOnInit(): void {
     if (!this.pokemons.length) {
-      this.pokemonPagination(environment.URL_API_DEFAUT)
+      this.pokemonPagination(environment.URL_API_DEFAUT);
     }
     if (!this.pokedex.length) {
-      this.getRegion()
+      this.getRegion();
     }
   }
 
   ngOnDestroy(): void {
-    this.pokemonService.unsubscribeALL()
+    this.pokemonService.unsubscribeALL();
   }
 
   pokemonPagination(url: string): void {
-    this.pokemonService.fetchPokemons(url)
+    this.pokemonService.fetchPokemons(url);
   }
   getRegion(): void {
-    this.pokemonService.getRegion()
+    this.pokemonService.getRegion();
   }
 }
-
-
