@@ -1,0 +1,5 @@
+.facts { display: grid; grid-template-columns: 7rem 1fr; row-gap: 0.6rem; margin: 0; }
+dt { color: #6c757d; font-weight: 400; }
+dd { margin: 0; }
+.male { color: #6890f0; margin-right: 1rem; }
+.female { color: #f85888; }

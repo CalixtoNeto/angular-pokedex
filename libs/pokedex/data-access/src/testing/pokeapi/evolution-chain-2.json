@@ -1,0 +1,50 @@
+{
+  "id": 2,
+  "chain": {
+    "is_baby": false,
+    "species": {
+      "name": "charmander",
+      "url": "/api/v2/pokemon-species/4/"
+    },
+    "evolution_details": [],
+    "evolves_to": [
+      {
+        "is_baby": false,
+        "species": {
+          "name": "charmeleon",
+          "url": "/api/v2/pokemon-species/5/"
+        },
+        "evolution_details": [
+          {
+            "trigger": {
+              "name": "level-up"
+            },
+            "min_level": 16,
+            "item": null,
+            "min_happiness": null
+          }
+        ],
+        "evolves_to": [
+          {
+            "is_baby": false,
+            "species": {
+              "name": "charizard",
+              "url": "/api/v2/pokemon-species/6/"
+            },
+            "evolution_details": [
+              {
+                "trigger": {
+                  "name": "level-up"
+                },
+                "min_level": 36,
+                "item": null,
+                "min_happiness": null
+              }
+            ],
+            "evolves_to": []
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": 1,
+  "name": "bulbasaur",
+  "is_baby": false,
+  "is_legendary": false,
+  "is_mythical": false,
+  "gender_rate": 1,
+  "egg_groups": [
+    {
+      "name": "monster"
+    },
+    {
+      "name": "plant"
+    }
+  ],
+  "evolution_chain": {
+    "url": "/api/v2/evolution-chain/1/"
+  },
+  "genera": [
+    {
+      "genus": "Seed Pokémon",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      }
+    }
+  ],
+  "flavor_text_entries": [
+    {
+      "flavor_text": "A strange seed was\nplanted on its\nback at birth.\fThe plant sprouts\nand grows with\nthis POKéMON.",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      },
+      "version": {
+        "name": "red",
+        "url": "/api/v2/version/1/"
+      }
+    }
+  ]
+}

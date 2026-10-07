@@ -1,28 +1,44 @@
-# Pokédex em Angular
+# Pokédex em Angular (monorepo Nx)
 
-App estático em Angular 22 (standalone, signals, sem zone.js) que lista Pokémon por região a partir da PokeAPI.
+App estático em Angular 22 (standalone, signals, sem zone.js): lista Pokémon por região e mostra o detalhe de
+cada um (stats, evoluções, raridade, fraquezas), a partir da PokeAPI.
 
 ## Antes de dar uma mudança por pronta
 
 Rode, nesta ordem (Node 24, veja `.nvmrc`):
 
-1. `npm test`: testes unitários com Vitest, no Node, sem navegador.
-2. `npm run build`
-3. `npm run e2e`: Playwright abre o app compilado num Chromium e simula a PokeAPI (`e2e/fixtures/pokeapi.ts`).
-   Nada sai para a rede, então rodam igual em qualquer máquina.
+1. `npm run lint`: fronteiras entre libs, regra própria `pokedex/dumb-component`, tamanho e complexidade.
+2. `npm run test:ci`: testes unitários (Vitest, sem navegador) com cobertura mínima **por arquivo**.
+3. `npm run build`
+4. `npm run e2e`: Playwright com a PokeAPI simulada pelas respostas reais em
+   `libs/pokedex/data-access/src/testing/pokeapi/`. Nada sai para a rede.
 
-Os testes em `e2e/` descrevem o comportamento visto de fora e não dependem de como o app é escrito.
-Se um deles falhar depois de uma refatoração, o comportamento mudou: corrija o código, não o teste.
-Só mude um teste em `e2e/` quando a mudança de comportamento for o objetivo da tarefa, e diga isso no resumo.
+Nenhum desses gates se desliga para fazer uma mudança passar. Se um deles barrar, a mudança está errada ou o
+teste que falta ainda não foi escrito. Não afrouxe `eslint.base.config.mjs`, `nx.json` (cobertura) nem
+`tsconfig.base.json` sem que isso seja o objetivo da tarefa.
 
-Regra nova: escreva primeiro o teste unitário ao lado do arquivo (`*.spec.ts`), veja falhar, depois o código.
+Os testes em `e2e/` descrevem o comportamento visto de fora. Se um deles falhar depois de uma refatoração,
+corrija o código, não o teste.
 
-## Como o código está organizado
+## Fluxo para uma funcionalidade nova
 
-- `src/app/pokeapi/`: acesso à PokeAPI (`PokeApiClient`), tipos das respostas e o interceptor de cache.
-- `src/app/pokedex/`: modelo do domínio, funções puras (`toPokemon`, `filterByName`) e o `PokedexStore` com o estado em signals.
-- `src/app/pokemon-list/` e `src/app/pokemon-card/`: componentes, sem lógica além de ler o store.
-- Estado novo vai para o store como `signal`/`computed`; dados assíncronos entram com `rxResource` ou `toSignal`.
-- Componentes usam `input()`, `inject()` e a detecção de mudanças padrão (OnPush). Não há zone.js: algo que
-  muda fora de um signal não aparece na tela.
-- Arquivos curtos, funções curtas, nomes que dizem o que a coisa é. Comentário só para o porquê.
+1. Escreva o teste ponta a ponta do que o usuário vai ver e veja falhar.
+2. Desça camada por camada, sempre com o teste antes do código: `domain` (modelo e regras puras),
+   `data-access` (mapeamento testado contra as respostas reais), `ui`/`ui-detail` (componentes dumb),
+   `feature-*` (componentes smart).
+3. Resposta nova da PokeAPI: baixe do espelho `PokeAPI/api-data` e recorte só os campos usados.
+
+## Libs e fronteiras (impostas pelo lint)
+
+| Lib | Tag | Pode importar | O que tem |
+|---|---|---|---|
+| `@pokedex/domain` | `type:domain` | nada | Modelo, `PokemonRepository` (contrato), `typeDefenses`, funções puras |
+| `@pokedex/data-access` | `type:data-access` | domain | `PokeApiPokemonRepository`, mapeamento, cache, `providePokeApi()` |
+| `@pokedex/ui`, `@pokedex/ui-detail` | `type:ui` | domain, ui | Componentes dumb: só `input()`/`output()`, sem `inject()` nem HTTP |
+| `@pokedex/feature-list`, `@pokedex/feature-detail` | `type:feature` | domain, ui | Componentes smart e stores; dependem do contrato, nunca da API |
+| app (`src/`) | `type:app` | todas | Rotas e `providePokeApi()`: o único lugar que escolhe a implementação |
+
+- Estado em `signal`/`computed`; dados assíncronos com `rxResource` ou `toSignal`. Sem zone.js.
+- Componente dumb que precisa de dado novo ganha um `input()`; quem busca é a feature.
+- Uma lib por área carregada sob demanda: importar um barrel grande numa rota lazy puxa tudo para o bundle inicial.
+- Os nomes curtos dos componentes (`app-*`) e as classes `.card-title`/`.badge` são usados pelos testes ponta a ponta.

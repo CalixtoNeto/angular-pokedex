@@ -1,0 +1,110 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "build": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "test": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production"
+      ]
+    },
+    "lint": [
+      {
+        "cache": true
+      },
+      {
+        "filter": {
+          "plugin": "@nx/eslint/plugin"
+        },
+        "inputs": [
+          "default",
+          "^default",
+          "{workspaceRoot}/.eslintrc.json",
+          "{workspaceRoot}/.eslintignore",
+          "{workspaceRoot}/eslint.config.mjs",
+          "{workspaceRoot}/tools/lint-rules/**/*",
+          {
+            "externalDependencies": [
+              "eslint"
+            ]
+          }
+        ]
+      }
+    ],
+    "@angular/build:unit-test": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production"
+      ],
+      "configurations": {
+        "ci": {
+          "coverage": true,
+          "coverageReporters": [
+            "text-summary"
+          ],
+          "coverageThresholds": {
+            "perFile": true,
+            "statements": 90,
+            "branches": 85,
+            "functions": 90,
+            "lines": 90
+          },
+          "coverageInclude": [
+            "{projectRoot}/src/**/*.ts"
+          ],
+          "coverageExclude": [
+            "**/*.spec.ts",
+            "**/index.ts",
+            "**/*.types.ts"
+          ]
+        }
+      }
+    }
+  },
+  "namedInputs": {
+    "sharedGlobals": [],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/eslint.config.mjs"
+    ]
+  },
+  "generators": {
+    "@nx/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "none"
+    },
+    "@nx/angular:component": {
+      "style": "css"
+    }
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      },
+      "include": [
+        "libs/pokedex/data-access/**/*",
+        "libs/pokedex/domain/**/*",
+        "libs/pokedex/feature-list/**/*",
+        "libs/pokedex/ui/**/*"
+      ]
+    }
+  ]
+}

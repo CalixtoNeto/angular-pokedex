@@ -1,0 +1,20 @@
+{
+  "name": "pokedex-feature-list",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/pokedex/feature-list/src",
+  "prefix": "app",
+  "projectType": "library",
+  "tags": [
+    "scope:pokedex",
+    "type:feature"
+  ],
+  "targets": {
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "buildTarget": "angular-pokedex:build:development",
+        "tsConfig": "libs/pokedex/feature-list/tsconfig.spec.json"
+      }
+    }
+  }
+}

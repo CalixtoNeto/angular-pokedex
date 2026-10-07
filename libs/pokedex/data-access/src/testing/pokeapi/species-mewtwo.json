@@ -1,0 +1,38 @@
+{
+  "id": 150,
+  "name": "mewtwo",
+  "is_baby": false,
+  "is_legendary": true,
+  "is_mythical": false,
+  "gender_rate": -1,
+  "egg_groups": [
+    {
+      "name": "no-eggs"
+    }
+  ],
+  "evolution_chain": {
+    "url": "/api/v2/evolution-chain/77/"
+  },
+  "genera": [
+    {
+      "genus": "Genetic Pokémon",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      }
+    }
+  ],
+  "flavor_text_entries": [
+    {
+      "flavor_text": "It was created by\na scientist after\nyears of horrific\fgene splicing and\nDNA engineering\nexperiments.",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      },
+      "version": {
+        "name": "red",
+        "url": "/api/v2/version/1/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": 3,
+  "name": "venusaur",
+  "is_baby": false,
+  "is_legendary": false,
+  "is_mythical": false,
+  "gender_rate": 1,
+  "egg_groups": [
+    {
+      "name": "monster"
+    },
+    {
+      "name": "plant"
+    }
+  ],
+  "evolution_chain": {
+    "url": "/api/v2/evolution-chain/1/"
+  },
+  "genera": [
+    {
+      "genus": "Seed Pokémon",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      }
+    }
+  ],
+  "flavor_text_entries": [
+    {
+      "flavor_text": "The plant blooms\nwhen it is\nabsorbing solar\fenergy. It stays\non the move to\nseek sunlight.",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      },
+      "version": {
+        "name": "red",
+        "url": "/api/v2/version/1/"
+      }
+    }
+  ]
+}

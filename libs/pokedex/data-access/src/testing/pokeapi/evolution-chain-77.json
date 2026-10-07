@@ -1,0 +1,12 @@
+{
+  "id": 77,
+  "chain": {
+    "is_baby": false,
+    "species": {
+      "name": "mewtwo",
+      "url": "/api/v2/pokemon-species/150/"
+    },
+    "evolution_details": [],
+    "evolves_to": []
+  }
+}

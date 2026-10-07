@@ -1,0 +1,41 @@
+{
+  "id": 25,
+  "name": "pikachu",
+  "is_baby": false,
+  "is_legendary": false,
+  "is_mythical": false,
+  "gender_rate": 4,
+  "egg_groups": [
+    {
+      "name": "ground"
+    },
+    {
+      "name": "fairy"
+    }
+  ],
+  "evolution_chain": {
+    "url": "/api/v2/evolution-chain/10/"
+  },
+  "genera": [
+    {
+      "genus": "Mouse Pokémon",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      }
+    }
+  ],
+  "flavor_text_entries": [
+    {
+      "flavor_text": "When several of\nthese POKéMON\ngather, their\felectricity could\nbuild and cause\nlightning storms.",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      },
+      "version": {
+        "name": "red",
+        "url": "/api/v2/version/1/"
+      }
+    }
+  ]
+}

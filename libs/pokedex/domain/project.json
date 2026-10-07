@@ -1,0 +1,20 @@
+{
+  "name": "pokedex-domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/pokedex/domain/src",
+  "prefix": "app",
+  "projectType": "library",
+  "tags": [
+    "scope:pokedex",
+    "type:domain"
+  ],
+  "targets": {
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "buildTarget": "angular-pokedex:build:development",
+        "tsConfig": "libs/pokedex/domain/tsconfig.spec.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "lint-rules",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "tags": ["type:tooling"],
+  "targets": {
+    "test": {
+      "command": "vitest run --config tools/lint-rules/vitest.config.mjs",
+      "options": { "cwd": "{workspaceRoot}" }
+    }
+  }
+}

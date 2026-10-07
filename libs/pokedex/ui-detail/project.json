@@ -1,0 +1,23 @@
+{
+  "name": "pokedex-ui-detail",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/pokedex/ui-detail/src",
+  "prefix": "app",
+  "projectType": "library",
+  "tags": [
+    "scope:pokedex",
+    "type:ui"
+  ],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "buildTarget": "angular-pokedex:build:development",
+        "tsConfig": "libs/pokedex/ui-detail/tsconfig.spec.json"
+      }
+    }
+  }
+}

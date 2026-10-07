@@ -1,0 +1,38 @@
+{
+  "id": 151,
+  "name": "mew",
+  "is_baby": false,
+  "is_legendary": false,
+  "is_mythical": true,
+  "gender_rate": -1,
+  "egg_groups": [
+    {
+      "name": "no-eggs"
+    }
+  ],
+  "evolution_chain": {
+    "url": "/api/v2/evolution-chain/78/"
+  },
+  "genera": [
+    {
+      "genus": "New Species Pokémon",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      }
+    }
+  ],
+  "flavor_text_entries": [
+    {
+      "flavor_text": "So rare that it\nis still said to\nbe a mirage by\fmany experts. Only\na few people have\nseen it worldwide.",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      },
+      "version": {
+        "name": "red",
+        "url": "/api/v2/version/1/"
+      }
+    }
+  ]
+}

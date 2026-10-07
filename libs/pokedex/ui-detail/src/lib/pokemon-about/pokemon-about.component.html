@@ -1,0 +1,24 @@
+<p class="description">{{ detail().description }}</p>
+<dl class="facts">
+  <dt>Species</dt>
+  <dd>{{ detail().genus }}</dd>
+  <dt>Height</dt>
+  <dd>{{ detail().heightInMeters }} m</dd>
+  <dt>Weight</dt>
+  <dd>{{ detail().weightInKilograms }} kg</dd>
+  <dt>Abilities</dt>
+  <dd>{{ abilities() }}</dd>
+</dl>
+<h4 class="h6 mt-4">Breeding</h4>
+<dl class="facts">
+  <dt>Gender</dt>
+  <dd>
+    @if (detail().gender; as gender) {
+      <span class="male">♂ {{ gender.male }}%</span> <span class="female">♀ {{ gender.female }}%</span>
+    } @else {
+      Genderless
+    }
+  </dd>
+  <dt>Egg Groups</dt>
+  <dd>{{ eggGroups() }}</dd>
+</dl>

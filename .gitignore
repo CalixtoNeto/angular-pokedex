@@ -48,3 +48,10 @@ Thumbs.db
 # Playwright
 /test-results
 /playwright-report
+
+
+
+.nx/cache
+.nx/workspace-data
+.nx/migrate-runs
+.angular

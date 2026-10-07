@@ -1,0 +1,5 @@
+.rarity { display: inline-block; padding: 0.2rem 0.7rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em; color: #fff; }
+.rarity-legendary { background: linear-gradient(135deg, #f7b733, #fc4a1a); }
+.rarity-mythical { background: linear-gradient(135deg, #a18cd1, #fbc2eb); color: #4a2a6a; }
+.rarity-baby { background: #ffd6e0; color: #a3364f; }
