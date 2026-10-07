@@ -26,7 +26,7 @@
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^22.2.2",
+    "@angular/build": "^22.2.2",
     "@angular/cli": "^22.2.2",
     "@angular/compiler-cli": "^22.2.1",
     "@playwright/test": "^1.56.1",
@@ -40,5 +40,8 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~6.0.3"
+  },
+  "engines": {
+    "node": ">=22.22.3"
   }
 }
