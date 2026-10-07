@@ -1,27 +1,38 @@
-# AngularPokedex
+# Pokédex em Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
+Lista os Pokémon de cada região (Kanto, Johto, …) a partir da [PokeAPI](https://pokeapi.co/), com busca por nome.
 
-## Development server
+Projeto de estudo. Começou em Angular 12 e foi atualizado, uma versão por vez, até o Angular 22, com componentes
+standalone, estado em signals e sem zone.js.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Rodando
 
-## Code scaffolding
+Requer Node 24 (veja `.nvmrc`).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm ci
+npm start          # http://localhost:4200
+```
 
-## Build
+## Testes
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+npm test           # unitários (Vitest, no Node)
+npm run build
+npm run e2e        # ponta a ponta (Playwright, com a PokeAPI simulada)
+```
 
-## Running unit tests
+Os testes ponta a ponta sobem o app compilado num Chromium e respondem no lugar da PokeAPI com dados fixos
+(`e2e/fixtures/pokeapi.ts`). Eles foram escritos contra a versão em Angular 12, antes da atualização, e
+garantem que o comportamento continuou o mesmo em todas as versões.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Para instalar o Chromium do Playwright na primeira vez: `npx playwright install chromium`.
 
-## Running end-to-end tests
+## Organização
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+| Pasta | O que tem |
+|---|---|
+| `src/app/pokeapi/` | Acesso à PokeAPI, tipos das respostas e cache dos GET |
+| `src/app/pokedex/` | Modelo, funções puras e o store com o estado em signals |
+| `src/app/pokemon-list/`, `src/app/pokemon-card/` | Componentes |
+| `e2e/` | Testes ponta a ponta e a PokeAPI simulada |
