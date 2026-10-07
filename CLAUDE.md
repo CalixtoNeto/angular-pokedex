@@ -13,6 +13,10 @@ Rode, nesta ordem (Node 24, veja `.nvmrc`):
 4. `npm run e2e`: Playwright com a PokeAPI simulada pelas respostas reais em
    `libs/pokedex/data-access/src/testing/pokeapi/`. Nada sai para a rede.
 
+Na CI, depois dos unitários, o SonarQube Cloud analisa o código e a cobertura (`sonar-project.properties`) e
+reprova pelo Quality Gate. Lib nova com testes: acrescente o `coverage/<projeto>/lcov.info` dela em
+`sonar.javascript.lcov.reportPaths`.
+
 Nenhum desses gates se desliga para fazer uma mudança passar. Se um deles barrar, a mudança está errada ou o
 teste que falta ainda não foi escrito. Não afrouxe `eslint.base.config.mjs`, `nx.json` (cobertura) nem
 `tsconfig.base.json` sem que isso seja o objetivo da tarefa.
