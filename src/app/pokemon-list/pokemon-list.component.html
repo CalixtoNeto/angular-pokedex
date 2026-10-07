@@ -2,15 +2,12 @@
   <div class="row">
     <div class="col-xl-8 offset-xl-2">
       <div class="row">
-        <h1 class="mb-4" align="center">Pokedex</h1>
+        <h1 class="mb-4 text-center">Pokedex</h1>
         <div class="row mb-4">
-          <div class="col-sm margim text-center" align="center">
-            @for (region of pokedex; track region) {
-              <button
-                class="badge border rounded-pill me-1 bg-ice"
-                (click)="pokemonPagination(region.url)"
-              >
-                {{ region.name.split("-").join(" ") | titlecase }}
+          <div class="col-sm text-center">
+            @for (region of store.regions(); track region.url) {
+              <button class="badge border rounded-pill me-1 bg-ice" (click)="store.selectRegion(region.url)">
+                {{ region.label | titlecase }}
               </button>
             }
           </div>
@@ -20,23 +17,17 @@
             type="text"
             class="form-control mb-4"
             placeholder="Search"
-            [(ngModel)]="searchFilter"
             id="listSearch"
+            [value]="store.search()"
+            (input)="onSearch($event)"
           />
         </div>
-        @for (
-          pokemon of pokemons | searchFilter: searchFilter;
-          track pokemon;
-          let i = $index
-        ) {
+        @for (pokemon of store.visiblePokemons(); track pokemon.id) {
           <div class="col-md-6">
-            <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
+            <app-pokemon-card [pokemon]="pokemon" />
           </div>
         }
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm text-center"></div>
   </div>
 </div>

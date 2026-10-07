@@ -1,52 +1,17 @@
-import { Subscription } from 'rxjs';
-import { PokemonService } from './../service/pokemon.service';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { FormsModule } from '@angular/forms';
-import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
+import { Component, inject } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
-import { SearchFilterPipe } from '../pipes/search-filter.pipe';
+import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
+import { PokedexStore } from '../pokedex/pokedex.store';
 
 @Component({
   selector: 'app-pokemon-list',
   templateUrl: './pokemon-list.component.html',
-  styleUrls: ['./pokemon-list.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [FormsModule, PokemonCardComponent, TitleCasePipe, SearchFilterPipe],
+  imports: [PokemonCardComponent, TitleCasePipe],
 })
-export class PokemonListComponent implements OnInit {
-  loading: boolean = false;
-  public searchFilter: any = '';
+export class PokemonListComponent {
+  protected readonly store = inject(PokedexStore);
 
-  constructor(private pokemonService: PokemonService) {}
-
-  get pokemons(): any[] {
-    return this.pokemonService.pokemons;
-  }
-
-  get pokedex(): any[] {
-    return this.pokemonService.pokedex;
-  }
-  get next(): string {
-    return this.pokemonService.next;
-  }
-  ngOnInit(): void {
-    if (!this.pokemons.length) {
-      this.pokemonPagination(environment.URL_API_DEFAUT);
-    }
-    if (!this.pokedex.length) {
-      this.getRegion();
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.pokemonService.unsubscribeALL();
-  }
-
-  pokemonPagination(url: string): void {
-    this.pokemonService.fetchPokemons(url);
-  }
-  getRegion(): void {
-    this.pokemonService.getRegion();
+  protected onSearch(event: Event) {
+    this.store.search.set((event.target as HTMLInputElement).value);
   }
 }
