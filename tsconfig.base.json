@@ -21,6 +21,12 @@
       ],
       "@pokedex/feature-list": [
         "./libs/pokedex/feature-list/src/index.ts"
+      ],
+      "@pokedex/feature-detail": [
+        "./libs/pokedex/feature-detail/src/index.ts"
+      ],
+      "@pokedex/ui-detail": [
+        "./libs/pokedex/ui-detail/src/index.ts"
       ]
     },
     "noUncheckedIndexedAccess": true,
@@ -29,6 +35,7 @@
     "exactOptionalPropertyTypes": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   }
 }

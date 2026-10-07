@@ -26,6 +26,12 @@ describe('PokemonCardComponent', () => {
     expect(selos[0]?.classList).toContain('bg-grass');
   });
 
+  it('o card tem a cor do primeiro tipo e o número da Pokédex', () => {
+    const card = render();
+    expect(card.querySelector('.pokemon-card')?.classList).toContain('bg-grass');
+    expect(card.querySelector('.number')?.textContent?.trim()).toBe('#001');
+  });
+
   it('carrega a imagem só quando ela chega perto da tela', () => {
     const imagem = render().querySelector('img') as HTMLImageElement;
     expect(imagem.getAttribute('loading')).toBe('lazy');

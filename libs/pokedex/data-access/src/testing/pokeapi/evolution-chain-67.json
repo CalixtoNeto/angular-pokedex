@@ -1,0 +1,163 @@
+{
+  "id": 67,
+  "chain": {
+    "is_baby": false,
+    "species": {
+      "name": "eevee",
+      "url": "/api/v2/pokemon-species/133/"
+    },
+    "evolution_details": [],
+    "evolves_to": [
+      {
+        "is_baby": false,
+        "species": {
+          "name": "vaporeon",
+          "url": "/api/v2/pokemon-species/134/"
+        },
+        "evolution_details": [
+          {
+            "trigger": {
+              "name": "use-item"
+            },
+            "min_level": null,
+            "item": {
+              "name": "water-stone"
+            },
+            "min_happiness": null
+          }
+        ],
+        "evolves_to": []
+      },
+      {
+        "is_baby": false,
+        "species": {
+          "name": "jolteon",
+          "url": "/api/v2/pokemon-species/135/"
+        },
+        "evolution_details": [
+          {
+            "trigger": {
+              "name": "use-item"
+            },
+            "min_level": null,
+            "item": {
+              "name": "thunder-stone"
+            },
+            "min_happiness": null
+          }
+        ],
+        "evolves_to": []
+      },
+      {
+        "is_baby": false,
+        "species": {
+          "name": "flareon",
+          "url": "/api/v2/pokemon-species/136/"
+        },
+        "evolution_details": [
+          {
+            "trigger": {
+              "name": "use-item"
+            },
+            "min_level": null,
+            "item": {
+              "name": "fire-stone"
+            },
+            "min_happiness": null
+          }
+        ],
+        "evolves_to": []
+      },
+      {
+        "is_baby": false,
+        "species": {
+          "name": "espeon",
+          "url": "/api/v2/pokemon-species/196/"
+        },
+        "evolution_details": [
+          {
+            "trigger": {
+              "name": "level-up"
+            },
+            "min_level": null,
+            "item": null,
+            "min_happiness": 160
+          }
+        ],
+        "evolves_to": []
+      },
+      {
+        "is_baby": false,
+        "species": {
+          "name": "umbreon",
+          "url": "/api/v2/pokemon-species/197/"
+        },
+        "evolution_details": [
+          {
+            "trigger": {
+              "name": "level-up"
+            },
+            "min_level": null,
+            "item": null,
+            "min_happiness": 160
+          }
+        ],
+        "evolves_to": []
+      },
+      {
+        "is_baby": false,
+        "species": {
+          "name": "leafeon",
+          "url": "/api/v2/pokemon-species/470/"
+        },
+        "evolution_details": [
+          {
+            "trigger": {
+              "name": "level-up"
+            },
+            "min_level": null,
+            "item": null,
+            "min_happiness": null
+          }
+        ],
+        "evolves_to": []
+      },
+      {
+        "is_baby": false,
+        "species": {
+          "name": "glaceon",
+          "url": "/api/v2/pokemon-species/471/"
+        },
+        "evolution_details": [
+          {
+            "trigger": {
+              "name": "level-up"
+            },
+            "min_level": null,
+            "item": null,
+            "min_happiness": null
+          }
+        ],
+        "evolves_to": []
+      },
+      {
+        "is_baby": false,
+        "species": {
+          "name": "sylveon",
+          "url": "/api/v2/pokemon-species/700/"
+        },
+        "evolution_details": [
+          {
+            "trigger": {
+              "name": "level-up"
+            },
+            "min_level": null,
+            "item": null,
+            "min_happiness": null
+          }
+        ],
+        "evolves_to": []
+      }
+    ]
+  }
+}

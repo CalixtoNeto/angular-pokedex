@@ -1,15 +1,12 @@
-<div class="card mb-3">
+<div class="card pokemon-card bg-{{ mainType() }}">
   <div class="card-body">
-    <div class="row">
-      <div class="col-7 col-sm-8">
-        <h3 class="card-title">{{ pokemon().name | titlecase }}</h3>
-        @for (type of pokemon().types; track type) {
-          <span class="badge border rounded-pill me-1 bg-{{ type }}">{{ type | titlecase }}</span>
-        }
-      </div>
-      <div class="col-5 col-sm-4">
-        <img [src]="pokemon().image" [alt]="pokemon().name" class="img-fluid" loading="lazy" decoding="async" />
-      </div>
+    <span class="number">{{ number() }}</span>
+    <h3 class="card-title">{{ pokemon().name | titlecase }}</h3>
+    <div class="types">
+      @for (type of pokemon().types; track type) {
+        <span class="badge rounded-pill bg-{{ type }}">{{ type | titlecase }}</span>
+      }
     </div>
+    <img [src]="pokemon().image" [alt]="pokemon().name" class="artwork" loading="lazy" decoding="async" />
   </div>
 </div>

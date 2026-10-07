@@ -1,0 +1,57 @@
+@if (detail(); as pokemon) {
+  <article class="pokemon-detail">
+    <header class="detail-header bg-{{ pokemon.types[0] }}">
+      <a routerLink="/" class="back" aria-label="Back">←</a>
+      <div class="title-row">
+        <h1>{{ pokemon.name | titlecase }}</h1>
+        <span class="number">{{ number() }}</span>
+      </div>
+      <div class="types">
+        @for (type of pokemon.types; track type) {
+          <span class="badge rounded-pill bg-{{ type }}">{{ type | titlecase }}</span>
+        }
+        <app-rarity-badge [rarity]="pokemon.rarity" />
+      </div>
+      <img class="artwork" [src]="pokemon.image" [alt]="pokemon.name" />
+    </header>
+
+    <section class="detail-body">
+      <div class="tabs" role="tablist">
+        @for (tab of tabs; track tab.id) {
+          <button
+            type="button"
+            role="tab"
+            [id]="'tab-' + tab.id"
+            [attr.aria-selected]="selectedTab() === tab.id"
+            (click)="selectedTab.set(tab.id)"
+          >
+            {{ tab.label }}
+          </button>
+        }
+      </div>
+      <div role="tabpanel" class="panel" [attr.aria-labelledby]="'tab-' + selectedTab()">
+        @switch (selectedTab()) {
+          @case ('about') {
+            <app-pokemon-about [detail]="pokemon" />
+          }
+          @case ('stats') {
+            <app-stat-bars [stats]="pokemon.stats" />
+          }
+          @case ('evolution') {
+            <app-evolution-chain [stages]="pokemon.evolution" />
+          }
+          @case ('defenses') {
+            <app-type-defenses [defenses]="defenses()" />
+          }
+        }
+      </div>
+    </section>
+  </article>
+} @else if (request.error()) {
+  <div class="container my-5 text-center">
+    <p>Pokémon not found.</p>
+    <a routerLink="/">Back to the Pokédex</a>
+  </div>
+} @else {
+  <p class="container my-5 text-center text-muted">Loading…</p>
+}

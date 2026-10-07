@@ -62,3 +62,23 @@ describe('PokeApiPokemonRepository', () => {
     expect(pending.cancelled).toBe(true);
   });
 });
+
+describe('PokeApiPokemonRepository.detail', () => {
+  it('busca Pokémon, espécie e cadeia de evolução, nessa ordem, e monta o detalhe', async () => {
+    TestBed.configureTestingModule({ providers: [provideHttpClient(), provideHttpClientTesting(), PokeApiPokemonRepository] });
+    const repository = TestBed.inject(PokeApiPokemonRepository);
+    const backend = TestBed.inject(HttpTestingController);
+    const fixtures = await Promise.all([
+      import('../testing/pokeapi/pokemon-bulbasaur.json'),
+      import('../testing/pokeapi/species-bulbasaur.json'),
+      import('../testing/pokeapi/evolution-chain-1.json'),
+    ]);
+    let name: string | undefined;
+    repository.detail('bulbasaur').subscribe(detail => (name = detail.name));
+    backend.expectOne(`${POKEAPI_URL}/pokemon/bulbasaur`).flush(fixtures[0].default);
+    backend.expectOne(`${POKEAPI_URL}/pokemon-species/bulbasaur`).flush(fixtures[1].default);
+    backend.expectOne(`${POKEAPI_URL}/evolution-chain/1/`).flush(fixtures[2].default);
+    expect(name).toBe('bulbasaur');
+    backend.verify();
+  });
+});

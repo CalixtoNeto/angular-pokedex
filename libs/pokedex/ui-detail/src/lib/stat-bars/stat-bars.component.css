@@ -1,0 +1,6 @@
+.stat-bars { width: 100%; }
+th { color: #6c757d; font-weight: 400; width: 6rem; padding: 0.4rem 0; }
+.value { width: 3rem; font-weight: 600; }
+.stat-bar span { display: block; height: 4px; border-radius: 2px; background: #48d0b0; }
+.stat-bar span.low { background: #fb6c6c; }
+.total th, .total .value { padding-top: 1rem; }

@@ -1,0 +1,38 @@
+{
+  "id": 172,
+  "name": "pichu",
+  "is_baby": true,
+  "is_legendary": false,
+  "is_mythical": false,
+  "gender_rate": 4,
+  "egg_groups": [
+    {
+      "name": "no-eggs"
+    }
+  ],
+  "evolution_chain": {
+    "url": "/api/v2/evolution-chain/10/"
+  },
+  "genera": [
+    {
+      "genus": "Tiny Mouse Pokémon",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      }
+    }
+  ],
+  "flavor_text_entries": [
+    {
+      "flavor_text": "It is not yet\nskilled at storing\nelectricity.\fIt may send out a\njolt if amused\nor startled.",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      },
+      "version": {
+        "name": "gold",
+        "url": "/api/v2/version/4/"
+      }
+    }
+  ]
+}

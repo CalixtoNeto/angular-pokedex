@@ -1,9 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EMPTY, Observable, catchError, from, map, mergeMap, of, scan, switchMap } from 'rxjs';
-import { Pokemon, PokemonRepository, Region } from '@pokedex/domain';
-import { PokedexResponse, PokemonResponse, RegionListResponse } from './pokeapi.types';
+import { Pokemon, PokemonDetail, PokemonRepository, Region } from '@pokedex/domain';
+import {
+  EvolutionChainResponse, PokedexResponse, PokemonDetailResponse, PokemonResponse, RegionListResponse, SpeciesResponse,
+} from './pokeapi.types';
 import { toPokemon, toRegion } from './pokeapi.mappers';
+import { toPokemonDetail } from './pokeapi-detail.mappers';
+import { idFromUrl } from './pokeapi-evolution.mappers';
 
 export const POKEAPI_URL = 'https://pokeapi.co/api/v2';
 const REGIONS_URL = `${POKEAPI_URL}/pokedex/?offset=0&limit=100`;
@@ -24,6 +28,19 @@ export class PokeApiPokemonRepository extends PokemonRepository {
       map(pokedex => pokedex.pokemon_entries.map(entry => entry.pokemon_species.name)),
       switchMap(names => (names.length ? this.pokemonsInOrder(names) : of([]))),
     );
+  }
+
+  // Três pedidos em sequência: a espécie diz qual é a cadeia de evolução.
+  detail(name: string): Observable<PokemonDetail> {
+    return this.http.get<PokemonDetailResponse>(`${POKEAPI_URL}/pokemon/${name}`).pipe(
+      switchMap(pokemon => this.http.get<SpeciesResponse>(`${POKEAPI_URL}/pokemon-species/${pokemon.species.name}`).pipe(
+        switchMap(species => this.evolutionChainOf(species).pipe(map(chain => toPokemonDetail(pokemon, species, chain)))),
+      )),
+    );
+  }
+
+  private evolutionChainOf(species: SpeciesResponse): Observable<EvolutionChainResponse> {
+    return this.http.get<EvolutionChainResponse>(`${POKEAPI_URL}/evolution-chain/${idFromUrl(species.evolution_chain.url)}/`);
   }
 
   private pokemonsInOrder(names: string[]): Observable<Pokemon[]> {

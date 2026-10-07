@@ -1,0 +1,7 @@
+.evolution-chain { display: flex; align-items: center; gap: 0.5rem; overflow-x: auto; }
+.evolution-step { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+.evolution-step + .evolution-step::before { content: '→'; color: #adb5bd; align-self: center; }
+.evolution-stage { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; }
+.evolution-stage img { width: 72px; height: 72px; object-fit: contain; }
+.name { font-weight: 600; }
+.condition { color: #6c757d; }

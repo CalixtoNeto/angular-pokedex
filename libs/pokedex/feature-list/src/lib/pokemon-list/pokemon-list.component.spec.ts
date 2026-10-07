@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { Observable, of } from 'rxjs';
-import { Pokemon, PokemonRepository, Region } from '@pokedex/domain';
+import { provideRouter } from '@angular/router';
+import { EMPTY, Observable, of } from 'rxjs';
+import { Pokemon, PokemonDetail, PokemonRepository, Region } from '@pokedex/domain';
 import { PokemonListComponent } from './pokemon-list.component';
 import { PokedexStore } from '../pokedex.store';
 
@@ -19,11 +20,14 @@ class FakePokemonRepository extends PokemonRepository {
   pokemonsOfRegion(regionId: string): Observable<Pokemon[]> {
     return of(POKEMONS[regionId] ?? []);
   }
+  detail(): Observable<PokemonDetail> {
+    return EMPTY;
+  }
 }
 
 describe('PokemonListComponent', () => {
   async function render() {
-    TestBed.configureTestingModule({ providers: [{ provide: PokemonRepository, useClass: FakePokemonRepository }] });
+    TestBed.configureTestingModule({ providers: [provideRouter([]), { provide: PokemonRepository, useClass: FakePokemonRepository }] });
     const fixture = TestBed.createComponent(PokemonListComponent);
     await fixture.whenStable();
     const element = fixture.nativeElement as HTMLElement;
@@ -42,6 +46,11 @@ describe('PokemonListComponent', () => {
     element.querySelectorAll('button')[1]?.click();
     await fixture.whenStable();
     expect(cardNames()).toEqual(['Chikorita']);
+  });
+
+  it('cada card é um link para o detalhe do Pokémon', async () => {
+    const { element } = await render();
+    expect([...element.querySelectorAll('a.pokemon-link')].map(a => a.getAttribute('href'))).toEqual(['/pokemon/bulbasaur', '/pokemon/charmander']);
   });
 
   it('digitar na busca filtra os cards', async () => {

@@ -1,6 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 import { Pokemon } from '@pokedex/domain';
+import { pokedexNumber } from '../format/format';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -10,4 +11,6 @@ import { Pokemon } from '@pokedex/domain';
 })
 export class PokemonCardComponent {
   readonly pokemon = input.required<Pokemon>();
+  protected readonly number = computed(() => pokedexNumber(this.pokemon().id));
+  protected readonly mainType = computed(() => this.pokemon().types[0] ?? 'normal');
 }

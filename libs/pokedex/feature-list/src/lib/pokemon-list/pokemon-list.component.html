@@ -23,8 +23,10 @@
           />
         </div>
         @for (pokemon of store.visiblePokemons(); track pokemon.id) {
-          <div class="col-md-6">
-            <app-pokemon-card [pokemon]="pokemon" />
+          <div class="col-6 mb-3">
+            <a class="pokemon-link" [routerLink]="['/pokemon', pokemon.name]">
+              <app-pokemon-card [pokemon]="pokemon" />
+            </a>
           </div>
         }
       </div>

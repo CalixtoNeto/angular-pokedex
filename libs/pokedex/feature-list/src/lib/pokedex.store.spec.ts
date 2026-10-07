@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { Observable, Subject, of } from 'rxjs';
-import { Pokemon, PokemonRepository, Region } from '@pokedex/domain';
+import { EMPTY, Observable, Subject, of } from 'rxjs';
+import { Pokemon, PokemonDetail, PokemonRepository, Region } from '@pokedex/domain';
 import { PokedexStore } from './pokedex.store';
 
 const pokemon = (id: number, name: string): Pokemon => ({ id, name, image: '', types: ['grass'] });
@@ -15,6 +15,9 @@ class FakePokemonRepository extends PokemonRepository {
     const stream = new Subject<Pokemon[]>();
     this.streams.set(regionId, stream);
     return stream;
+  }
+  detail(): Observable<PokemonDetail> {
+    return EMPTY;
   }
 }
 

@@ -1,0 +1,38 @@
+{
+  "id": 155,
+  "name": "cyndaquil",
+  "is_baby": false,
+  "is_legendary": false,
+  "is_mythical": false,
+  "gender_rate": 1,
+  "egg_groups": [
+    {
+      "name": "ground"
+    }
+  ],
+  "evolution_chain": {
+    "url": "/api/v2/evolution-chain/80/"
+  },
+  "genera": [
+    {
+      "genus": "Fire Mouse Pokémon",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      }
+    }
+  ],
+  "flavor_text_entries": [
+    {
+      "flavor_text": "It is timid, and\nalways curls it­\nself up in a ball.\fIf attacked, it\nflares up its back\nfor protection.",
+      "language": {
+        "name": "en",
+        "url": "/api/v2/language/9/"
+      },
+      "version": {
+        "name": "gold",
+        "url": "/api/v2/version/4/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": 10,
+  "chain": {
+    "is_baby": true,
+    "species": {
+      "name": "pichu",
+      "url": "/api/v2/pokemon-species/172/"
+    },
+    "evolution_details": [],
+    "evolves_to": [
+      {
+        "is_baby": false,
+        "species": {
+          "name": "pikachu",
+          "url": "/api/v2/pokemon-species/25/"
+        },
+        "evolution_details": [
+          {
+            "trigger": {
+              "name": "level-up"
+            },
+            "min_level": null,
+            "item": null,
+            "min_happiness": 220
+          }
+        ],
+        "evolves_to": [
+          {
+            "is_baby": false,
+            "species": {
+              "name": "raichu",
+              "url": "/api/v2/pokemon-species/26/"
+            },
+            "evolution_details": [
+              {
+                "trigger": {
+                  "name": "use-item"
+                },
+                "min_level": null,
+                "item": {
+                  "name": "thunder-stone"
+                },
+                "min_happiness": null
+              }
+            ],
+            "evolves_to": []
+          }
+        ]
+      }
+    ]
+  }
+}
