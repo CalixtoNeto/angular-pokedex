@@ -1,5 +1,6 @@
 import nx from "@nx/eslint-plugin";
 import baseConfig from "../../../eslint.config.mjs";
+import pokedex from "../../../tools/lint-rules/index.mjs";
 
 export default [
     ...nx.configs["flat/angular"],
@@ -27,6 +28,11 @@ export default [
                 }
             ]
         }
+    },
+    {
+        files: ["**/*.ts"],
+        plugins: { pokedex },
+        rules: { "pokedex/dumb-component": "error" }
     },
     {
         files: [

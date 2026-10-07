@@ -29,6 +29,14 @@ export default [
         }
     },
     {
+        files: ["**/*.ts"],
+        rules: {
+            "no-restricted-imports": ["error", {
+                paths: [{ name: "@angular/common/http", message: "Feature não fala com HTTP: dependa do PokemonRepository (@pokedex/domain)." }]
+            }]
+        }
+    },
+    {
         files: [
             "**/*.html"
         ],

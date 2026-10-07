@@ -23,7 +23,7 @@ describe('PokemonCardComponent', () => {
   it('mostra um selo por tipo, com a cor do tipo', () => {
     const selos = [...render().querySelectorAll('.badge')];
     expect(selos.map(s => s.textContent?.trim())).toEqual(['Grass', 'Poison']);
-    expect(selos[0].classList).toContain('bg-grass');
+    expect(selos[0]?.classList).toContain('bg-grass');
   });
 
   it('carrega a imagem só quando ela chega perto da tela', () => {

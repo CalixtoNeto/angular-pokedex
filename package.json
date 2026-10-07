@@ -6,8 +6,10 @@
     "start": "nx serve",
     "build": "nx build",
     "watch": "nx build --watch --configuration development",
-    "test": "nx run-many -t test --watch=false",
-    "e2e": "playwright test"
+    "test": "nx run-many -t test",
+    "e2e": "playwright test",
+    "test:ci": "nx run-many -t test -c ci",
+    "lint": "nx run-many -t lint"
   },
   "private": true,
   "dependencies": {
@@ -41,6 +43,7 @@
     "@swc/helpers": "~0.5.18",
     "@types/node": "^24.0.0",
     "@typescript-eslint/utils": "^8.58.0",
+    "@vitest/coverage-v8": "^5.0.3",
     "angular-eslint": "^22.1.0",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",

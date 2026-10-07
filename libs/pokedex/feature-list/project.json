@@ -9,9 +9,6 @@
     "type:feature"
   ],
   "targets": {
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "test": {
       "executor": "@angular/build:unit-test",
       "options": {

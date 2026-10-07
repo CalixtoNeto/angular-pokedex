@@ -18,8 +18,10 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - name: Testes unitários (Vitest)
-        run: npm test
+      - name: Lint (fronteiras entre libs e regras do projeto)
+        run: npm run lint
+      - name: Testes unitários com cobertura mínima por arquivo
+        run: npm run test:ci
       - name: Build de produção
         run: npm run build
       - name: Chromium para o Playwright

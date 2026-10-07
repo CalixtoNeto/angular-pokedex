@@ -79,6 +79,17 @@
       "options": {
         "buildTarget": "angular-pokedex:build"
       }
+    },
+    "lint": {
+      "command": "eslint src e2e playwright.config.ts",
+      "options": {
+        "cwd": "{workspaceRoot}"
+      },
+      "cache": true,
+      "inputs": [
+        "default",
+        "{workspaceRoot}/eslint.config.mjs"
+      ]
     }
   },
   "tags": [

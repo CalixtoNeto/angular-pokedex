@@ -50,7 +50,20 @@ export default [
             "**/*.cjs",
             "**/*.mjs"
         ],
-        // Override or add rules here
-        rules: {}
+        rules: {
+            "@typescript-eslint/no-explicit-any": "error",
+            "@typescript-eslint/no-non-null-assertion": "error"
+        }
+    },
+    {
+        // Arquivos e funções curtos: cabem inteiros no contexto de quem edita, pessoa ou agente.
+        files: ["libs/**/*.ts", "src/**/*.ts"],
+        ignores: ["**/*.spec.ts"],
+        rules: {
+            "max-lines": ["error", { max: 150, skipBlankLines: true, skipComments: true }],
+            "max-lines-per-function": ["error", { max: 30, skipBlankLines: true, skipComments: true }],
+            complexity: ["error", 8],
+            "max-params": ["error", 4]
+        }
     }
 ];
