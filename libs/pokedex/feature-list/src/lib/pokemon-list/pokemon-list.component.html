@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xl-8 offset-xl-2">
       <div class="row">
-        <h1 class="mb-4 text-center">Pokedex</h1>
+        <h1 class="mb-4 text-center" i18n="App title@@list.title">Pokedex</h1>
         <div class="row mb-4">
           <div class="col-sm text-center">
             @for (region of store.regions(); track region.id) {
@@ -17,6 +17,7 @@
             type="text"
             class="form-control mb-4"
             placeholder="Search"
+            i18n-placeholder="Search by Pokémon name@@list.search"
             id="listSearch"
             [value]="store.search()"
             (input)="onSearch($event)"

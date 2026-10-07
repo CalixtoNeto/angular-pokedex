@@ -1,24 +1,28 @@
-<p class="description">{{ detail().description }}</p>
+<!-- Textos da PokeAPI levam lang: espécie e descrição vêm no idioma que a API tiver; habilidades e grupos de ovo, em inglês. -->
+<p class="description" [attr.lang]="detail().textLanguage">{{ detail().description }}</p>
 <dl class="facts">
-  <dt>Species</dt>
-  <dd>{{ detail().genus }}</dd>
-  <dt>Height</dt>
-  <dd>{{ detail().heightInMeters }} m</dd>
-  <dt>Weight</dt>
-  <dd>{{ detail().weightInKilograms }} kg</dd>
-  <dt>Abilities</dt>
-  <dd>{{ abilities() }}</dd>
+  <dt i18n="@@about.species">Species</dt>
+  <dd class="genus" [attr.lang]="detail().textLanguage">{{ detail().genus }}</dd>
+  <dt i18n="@@about.height">Height</dt>
+  <dd i18n="Height in meters@@about.heightValue">{{ detail().heightInMeters | number }} m</dd>
+  <dt i18n="@@about.weight">Weight</dt>
+  <dd i18n="Weight in kilograms@@about.weightValue">{{ detail().weightInKilograms | number }} kg</dd>
+  <dt i18n="@@about.abilities">Abilities</dt>
+  <dd>
+    @for (ability of abilities(); track ability.name) {<span lang="en">{{ ability.label }}</span>{{ ability.suffix }}{{ $last ? '' : ', ' }}}
+  </dd>
 </dl>
-<h4 class="h6 mt-4">Breeding</h4>
+<h4 class="h6 mt-4" i18n="@@about.breeding">Breeding</h4>
 <dl class="facts">
-  <dt>Gender</dt>
+  <dt i18n="@@about.gender">Gender</dt>
   <dd>
     @if (detail().gender; as gender) {
-      <span class="male">♂ {{ gender.male }}%</span> <span class="female">♀ {{ gender.female }}%</span>
+      <span class="male">♂ {{ gender.male / 100 | percent: '1.0-1' }}</span>
+      <span class="female">♀ {{ gender.female / 100 | percent: '1.0-1' }}</span>
     } @else {
-      Genderless
+      <ng-container i18n="Species without gender@@about.genderless">Genderless</ng-container>
     }
   </dd>
-  <dt>Egg Groups</dt>
-  <dd>{{ eggGroups() }}</dd>
+  <dt i18n="@@about.eggGroups">Egg Groups</dt>
+  <dd lang="en">{{ eggGroups() }}</dd>
 </dl>

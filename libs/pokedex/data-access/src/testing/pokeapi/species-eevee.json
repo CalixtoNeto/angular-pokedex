@@ -20,6 +20,13 @@
         "name": "en",
         "url": "/api/v2/language/9/"
       }
+    },
+    {
+      "genus": "Pokémon Evolución",
+      "language": {
+        "name": "es",
+        "url": "/api/v2/language/7/"
+      }
     }
   ],
   "flavor_text_entries": [
@@ -32,6 +39,17 @@
       "version": {
         "name": "red",
         "url": "/api/v2/version/1/"
+      }
+    },
+    {
+      "flavor_text": "Un extraño Pokémon que se adapta a los entornos\nmás hostiles gracias a sus diferentes evoluciones.",
+      "language": {
+        "name": "es",
+        "url": "/api/v2/language/7/"
+      },
+      "version": {
+        "name": "x",
+        "url": "/api/v2/version/23/"
       }
     }
   ]

@@ -5,7 +5,7 @@ import { Pokemon, PokemonDetail, PokemonRepository, Region } from '@pokedex/doma
 import { PokemonDetailPageComponent } from './pokemon-detail-page.component';
 
 const MEWTWO: PokemonDetail = {
-  id: 150, name: 'mewtwo', image: '/150.png', types: ['psychic'], genus: 'Genetic Pokémon', description: 'Created.',
+  id: 150, name: 'mewtwo', image: '/150.png', types: ['psychic'], textLanguage: 'en', genus: 'Genetic Pokémon', description: 'Created.',
   heightInMeters: 2, weightInKilograms: 122, abilities: [{ name: 'pressure', hidden: false }],
   stats: [{ name: 'hp', value: 106 }], eggGroups: ['no-eggs'], gender: null, rarity: 'legendary',
   evolution: [[{ id: 150, name: 'mewtwo', image: '/150.png', condition: null }]],

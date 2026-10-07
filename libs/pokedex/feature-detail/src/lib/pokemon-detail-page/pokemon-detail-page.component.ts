@@ -3,7 +3,7 @@ import { TitleCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { PokemonRepository, typeDefenses } from '@pokedex/domain';
-import { pokedexNumber } from '@pokedex/ui';
+import { TypeLabelPipe, pokedexNumber } from '@pokedex/ui';
 import {
   EvolutionChainComponent, PokemonAboutComponent, RarityBadgeComponent, StatBarsComponent, TypeDefensesComponent,
 } from '@pokedex/ui-detail';
@@ -11,10 +11,10 @@ import {
 type Tab = 'about' | 'stats' | 'evolution' | 'defenses';
 
 const TABS: { id: Tab; label: string }[] = [
-  { id: 'about', label: 'About' },
-  { id: 'stats', label: 'Base Stats' },
-  { id: 'evolution', label: 'Evolution' },
-  { id: 'defenses', label: 'Defenses' },
+  { id: 'about', label: $localize`:Detail tab@@detail.tab.about:About` },
+  { id: 'stats', label: $localize`:Detail tab@@detail.tab.stats:Base Stats` },
+  { id: 'evolution', label: $localize`:Detail tab@@detail.tab.evolution:Evolution` },
+  { id: 'defenses', label: $localize`:Detail tab@@detail.tab.defenses:Defenses` },
 ];
 
 // Componente smart: lê a rota (name), pede o detalhe ao repositório e distribui os dados aos componentes de ui.
@@ -22,7 +22,7 @@ const TABS: { id: Tab; label: string }[] = [
   selector: 'app-pokemon-detail-page',
   imports: [
     RouterLink, TitleCasePipe, PokemonAboutComponent, StatBarsComponent, EvolutionChainComponent, TypeDefensesComponent,
-    RarityBadgeComponent,
+    RarityBadgeComponent, TypeLabelPipe,
   ],
   templateUrl: './pokemon-detail-page.component.html',
   styleUrl: './pokemon-detail-page.component.css',
@@ -40,7 +40,10 @@ export class PokemonDetailPageComponent {
     stream: ({ params }) => this.repository.detail(params),
   });
 
-  protected readonly detail = computed(() => (this.request.hasValue() ? this.request.value() : null));
-  protected readonly number = computed(() => pokedexNumber(this.detail()?.id ?? 0));
-  protected readonly defenses = computed(() => typeDefenses(this.detail()?.types ?? []));
+  // Número e defesas só existem com o detalhe carregado: saem juntos dele, sem valor provisório.
+  protected readonly page = computed(() => {
+    if (!this.request.hasValue()) return null;
+    const pokemon = this.request.value();
+    return { pokemon, number: pokedexNumber(pokemon.id), defenses: typeDefenses(pokemon.types) };
+  });
 }

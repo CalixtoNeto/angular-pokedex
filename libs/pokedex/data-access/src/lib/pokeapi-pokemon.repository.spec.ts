@@ -1,7 +1,8 @@
+import { LOCALE_ID, Provider } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { Pokemon, Region } from '@pokedex/domain';
+import { Pokemon, PokemonDetail, Region } from '@pokedex/domain';
 import { POKEAPI_URL, PokeApiPokemonRepository } from './pokeapi-pokemon.repository';
 
 const entries = (...names: string[]) => ({ pokemon_entries: names.map(name => ({ pokemon_species: { name } })) });
@@ -64,8 +65,10 @@ describe('PokeApiPokemonRepository', () => {
 });
 
 describe('PokeApiPokemonRepository.detail', () => {
-  it('busca Pokémon, espécie e cadeia de evolução, nessa ordem, e monta o detalhe', async () => {
-    TestBed.configureTestingModule({ providers: [provideHttpClient(), provideHttpClientTesting(), PokeApiPokemonRepository] });
+  async function requestDetail(providers: Provider[] = []) {
+    TestBed.configureTestingModule({
+      providers: [provideHttpClient(), provideHttpClientTesting(), PokeApiPokemonRepository, ...providers],
+    });
     const repository = TestBed.inject(PokeApiPokemonRepository);
     const backend = TestBed.inject(HttpTestingController);
     const fixtures = await Promise.all([
@@ -73,12 +76,20 @@ describe('PokeApiPokemonRepository.detail', () => {
       import('../testing/pokeapi/species-bulbasaur.json'),
       import('../testing/pokeapi/evolution-chain-1.json'),
     ]);
-    let name: string | undefined;
-    repository.detail('bulbasaur').subscribe(detail => (name = detail.name));
+    let detail: PokemonDetail | undefined;
+    repository.detail('bulbasaur').subscribe(value => (detail = value));
     backend.expectOne(`${POKEAPI_URL}/pokemon/bulbasaur`).flush(fixtures[0].default);
     backend.expectOne(`${POKEAPI_URL}/pokemon-species/bulbasaur`).flush(fixtures[1].default);
     backend.expectOne(`${POKEAPI_URL}/evolution-chain/1/`).flush(fixtures[2].default);
-    expect(name).toBe('bulbasaur');
     backend.verify();
+    return detail;
+  }
+
+  it('busca Pokémon, espécie e cadeia de evolução, nessa ordem, e monta o detalhe', async () => {
+    expect((await requestDetail())?.name).toBe('bulbasaur');
+  });
+
+  it('traz os textos da espécie no idioma do site (LOCALE_ID)', async () => {
+    expect(await requestDetail([{ provide: LOCALE_ID, useValue: 'es' }])).toMatchObject({ textLanguage: 'es', genus: 'Pokémon Semilla' });
   });
 });

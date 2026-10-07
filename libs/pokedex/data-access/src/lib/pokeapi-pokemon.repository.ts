@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, LOCALE_ID, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EMPTY, Observable, catchError, from, map, mergeMap, of, scan, switchMap } from 'rxjs';
 import { Pokemon, PokemonDetail, PokemonRepository, Region } from '@pokedex/domain';
@@ -18,6 +18,8 @@ const PARALLEL_REQUESTS = 6;
 @Injectable()
 export class PokeApiPokemonRepository extends PokemonRepository {
   private readonly http = inject(HttpClient);
+  // Cada idioma é um build separado; o Angular define o LOCALE_ID de cada um.
+  private readonly localeId = inject(LOCALE_ID);
 
   regions(): Observable<Region[]> {
     return this.http.get<RegionListResponse>(REGIONS_URL).pipe(map(list => list.results.map(toRegion)));
@@ -34,7 +36,7 @@ export class PokeApiPokemonRepository extends PokemonRepository {
   detail(name: string): Observable<PokemonDetail> {
     return this.http.get<PokemonDetailResponse>(`${POKEAPI_URL}/pokemon/${name}`).pipe(
       switchMap(pokemon => this.http.get<SpeciesResponse>(`${POKEAPI_URL}/pokemon-species/${pokemon.species.name}`).pipe(
-        switchMap(species => this.evolutionChainOf(species).pipe(map(chain => toPokemonDetail(pokemon, species, chain)))),
+        switchMap(species => this.evolutionChainOf(species).pipe(map(chain => toPokemonDetail(pokemon, species, chain, this.localeId)))),
       )),
     );
   }

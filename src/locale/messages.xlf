@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="detail.back" datatype="html">
+        <source>Back</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/feature-detail/src/lib/pokemon-detail-page/pokemon-detail-page.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">Link back to the list</note>
+      </trans-unit>
+      <trans-unit id="detail.notFound" datatype="html">
+        <source>Pokémon not found.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/feature-detail/src/lib/pokemon-detail-page/pokemon-detail-page.component.html</context>
+          <context context-type="linenumber">52,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="detail.backToList" datatype="html">
+        <source>Back to the Pokédex</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/feature-detail/src/lib/pokemon-detail-page/pokemon-detail-page.component.html</context>
+          <context context-type="linenumber">53,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="detail.loading" datatype="html">
+        <source>Loading…</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/feature-detail/src/lib/pokemon-detail-page/pokemon-detail-page.component.html</context>
+          <context context-type="linenumber">56,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="detail.tab.about" datatype="html">
+        <source>About</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/feature-detail/src/lib/pokemon-detail-page/pokemon-detail-page.component.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <note priority="1" from="description">Detail tab</note>
+      </trans-unit>
+      <trans-unit id="detail.tab.stats" datatype="html">
+        <source>Base Stats</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/feature-detail/src/lib/pokemon-detail-page/pokemon-detail-page.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description">Detail tab</note>
+      </trans-unit>
+      <trans-unit id="detail.tab.evolution" datatype="html">
+        <source>Evolution</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/feature-detail/src/lib/pokemon-detail-page/pokemon-detail-page.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <note priority="1" from="description">Detail tab</note>
+      </trans-unit>
+      <trans-unit id="detail.tab.defenses" datatype="html">
+        <source>Defenses</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/feature-detail/src/lib/pokemon-detail-page/pokemon-detail-page.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="description">Detail tab</note>
+      </trans-unit>
+      <trans-unit id="list.title" datatype="html">
+        <source>Pokedex</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/feature-list/src/lib/pokemon-list/pokemon-list.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+        <note priority="1" from="description">App title</note>
+      </trans-unit>
+      <trans-unit id="list.search" datatype="html">
+        <source>Search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/feature-list/src/lib/pokemon-list/pokemon-list.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <note priority="1" from="description">Search by Pokémon name</note>
+      </trans-unit>
+      <trans-unit id="evolution.none" datatype="html">
+        <source>This Pokémon does not evolve.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/evolution-chain/evolution-chain.component.ts</context>
+          <context context-type="linenumber">28,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="evolution.trade" datatype="html">
+        <source>Trade</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/evolution-chain/evolution-condition-label.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">Evolution trigger</note>
+      </trans-unit>
+      <trans-unit id="evolution.levelUp" datatype="html">
+        <source>Level up</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/evolution-chain/evolution-condition-label.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">Evolution trigger</note>
+      </trans-unit>
+      <trans-unit id="evolution.useItem" datatype="html">
+        <source>Use item</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/evolution-chain/evolution-condition-label.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description">Evolution trigger</note>
+      </trans-unit>
+      <trans-unit id="evolution.level" datatype="html">
+        <source>Lv. <x id="level" equiv-text="condition.level"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/evolution-chain/evolution-condition-label.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <note priority="1" from="description">Evolves at this level, abbreviated</note>
+      </trans-unit>
+      <trans-unit id="evolution.friendship" datatype="html">
+        <source>Friendship</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/evolution-chain/evolution-condition-label.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <note priority="1" from="description">Evolves with high friendship</note>
+      </trans-unit>
+      <trans-unit id="about.species" datatype="html">
+        <source>Species</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/pokemon-about/pokemon-about.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="about.height" datatype="html">
+        <source>Height</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/pokemon-about/pokemon-about.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="about.heightValue" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ detail().heightInMeters | number }}"/> m</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/pokemon-about/pokemon-about.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+        <note priority="1" from="description">Height in meters</note>
+      </trans-unit>
+      <trans-unit id="about.weight" datatype="html">
+        <source>Weight</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/pokemon-about/pokemon-about.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="about.weightValue" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ detail().weightInKilograms | number }}"/> kg</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/pokemon-about/pokemon-about.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <note priority="1" from="description">Weight in kilograms</note>
+      </trans-unit>
+      <trans-unit id="about.abilities" datatype="html">
+        <source>Abilities</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/pokemon-about/pokemon-about.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="about.breeding" datatype="html">
+        <source>Breeding</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/pokemon-about/pokemon-about.component.html</context>
+          <context context-type="linenumber">15,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="about.gender" datatype="html">
+        <source>Gender</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/pokemon-about/pokemon-about.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="about.genderless" datatype="html">
+        <source>Genderless</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/pokemon-about/pokemon-about.component.html</context>
+          <context context-type="linenumber">23,26</context>
+        </context-group>
+        <note priority="1" from="description">Species without gender</note>
+      </trans-unit>
+      <trans-unit id="about.eggGroups" datatype="html">
+        <source>Egg Groups</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/pokemon-about/pokemon-about.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="about.hiddenAbility" datatype="html">
+        <source>(hidden)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/pokemon-about/pokemon-about.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <note priority="1" from="description">Marks a hidden ability</note>
+      </trans-unit>
+      <trans-unit id="rarity.legendary" datatype="html">
+        <source>Legendary</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/rarity-badge/rarity-badge.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description">Rarity badge</note>
+      </trans-unit>
+      <trans-unit id="rarity.mythical" datatype="html">
+        <source>Mythical</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/rarity-badge/rarity-badge.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <note priority="1" from="description">Rarity badge</note>
+      </trans-unit>
+      <trans-unit id="rarity.baby" datatype="html">
+        <source>Baby</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/rarity-badge/rarity-badge.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description">Rarity badge</note>
+      </trans-unit>
+      <trans-unit id="stat.hp" datatype="html">
+        <source>HP</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/stat-bars/stat-bars.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description">Base stat, abbreviated</note>
+      </trans-unit>
+      <trans-unit id="stat.attack" datatype="html">
+        <source>Attack</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/stat-bars/stat-bars.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <note priority="1" from="description">Base stat</note>
+      </trans-unit>
+      <trans-unit id="stat.defense" datatype="html">
+        <source>Defense</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/stat-bars/stat-bars.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description">Base stat</note>
+      </trans-unit>
+      <trans-unit id="stat.specialAttack" datatype="html">
+        <source>Sp. Atk</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/stat-bars/stat-bars.component.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">Base stat, abbreviated</note>
+      </trans-unit>
+      <trans-unit id="stat.specialDefense" datatype="html">
+        <source>Sp. Def</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/stat-bars/stat-bars.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description">Base stat, abbreviated</note>
+      </trans-unit>
+      <trans-unit id="stat.speed" datatype="html">
+        <source>Speed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/stat-bars/stat-bars.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">Base stat</note>
+      </trans-unit>
+      <trans-unit id="stat.total" datatype="html">
+        <source>Total</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/stat-bars/stat-bars.component.ts</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+        <note priority="1" from="description">Sum of all base stats</note>
+      </trans-unit>
+      <trans-unit id="defenses.none" datatype="html">
+        <source>None</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/type-defenses/type-defenses.component.ts</context>
+          <context context-type="linenumber">19,24</context>
+        </context-group>
+        <note priority="1" from="description">No type in this group</note>
+      </trans-unit>
+      <trans-unit id="defenses.weak" datatype="html">
+        <source>Weak to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/type-defenses/type-defenses.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <note priority="1" from="description">Attack types that deal extra damage</note>
+      </trans-unit>
+      <trans-unit id="defenses.resistant" datatype="html">
+        <source>Resistant to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/type-defenses/type-defenses.component.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <note priority="1" from="description">Attack types that deal less damage</note>
+      </trans-unit>
+      <trans-unit id="defenses.immune" datatype="html">
+        <source>Immune to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui-detail/src/lib/type-defenses/type-defenses.component.ts</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <note priority="1" from="description">Attack types that deal no damage</note>
+      </trans-unit>
+      <trans-unit id="languagePicker.label" datatype="html">
+        <source>Language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/language-picker/language-picker.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="type.normal" datatype="html">
+        <source>Normal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.fire" datatype="html">
+        <source>Fire</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.water" datatype="html">
+        <source>Water</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.electric" datatype="html">
+        <source>Electric</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.grass" datatype="html">
+        <source>Grass</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.ice" datatype="html">
+        <source>Ice</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.fighting" datatype="html">
+        <source>Fighting</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.poison" datatype="html">
+        <source>Poison</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.ground" datatype="html">
+        <source>Ground</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.flying" datatype="html">
+        <source>Flying</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.psychic" datatype="html">
+        <source>Psychic</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.bug" datatype="html">
+        <source>Bug</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.rock" datatype="html">
+        <source>Rock</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.ghost" datatype="html">
+        <source>Ghost</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.dragon" datatype="html">
+        <source>Dragon</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.dark" datatype="html">
+        <source>Dark</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.steel" datatype="html">
+        <source>Steel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+      <trans-unit id="type.fairy" datatype="html">
+        <source>Fairy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/pokedex/ui/src/lib/type-label/type-label.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <note priority="1" from="description">Pokémon type</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

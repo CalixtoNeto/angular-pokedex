@@ -40,7 +40,12 @@ export default [
         files: [
             "**/*.html"
         ],
-        // Override or add rules here
-        rules: {}
+        // Todo texto visível passa pela tradução, com um id fixo (@@) para a tradução não se perder quando o texto mudar.
+        rules: {
+            "@angular-eslint/template/i18n": ["error", {
+                checkId: true,
+                ignoreAttributes: ["aria-current", "data-defense", "decoding", "hreflang", "lang", "loading", "scope"]
+            }]
+        }
     }
 ];

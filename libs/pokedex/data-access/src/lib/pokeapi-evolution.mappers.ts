@@ -1,4 +1,4 @@
-import { EvolutionStage } from '@pokedex/domain';
+import { EvolutionCondition, EvolutionStage } from '@pokedex/domain';
 import { ChainLinkResponse, EvolutionDetailResponse } from './pokeapi.types';
 
 export const ARTWORK_URL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
@@ -6,14 +6,12 @@ export const ARTWORK_URL = 'https://raw.githubusercontent.com/PokeAPI/sprites/ma
 // A API guarda o id só dentro da URL do recurso: .../pokemon-species/25/
 export const idFromUrl = (url: string) => Number(url.match(/\/(\d+)\/?$/)?.[1]);
 
-const titleCase = (slug: string) => slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-
-export function evolutionCondition(detail: EvolutionDetailResponse | undefined): string | null {
+export function evolutionCondition(detail: EvolutionDetailResponse | undefined): EvolutionCondition | null {
   if (!detail) return null;
-  if (detail.min_level) return `Lv. ${detail.min_level}`;
-  if (detail.item) return titleCase(detail.item.name);
-  if (detail.min_happiness) return 'Friendship';
-  return detail.trigger ? titleCase(detail.trigger.name) : null;
+  if (detail.min_level) return { kind: 'level', level: detail.min_level };
+  if (detail.item) return { kind: 'item', item: detail.item.name };
+  if (detail.min_happiness) return { kind: 'friendship' };
+  return detail.trigger ? { kind: 'trigger', trigger: detail.trigger.name } : null;
 }
 
 function toStage(link: ChainLinkResponse): EvolutionStage {

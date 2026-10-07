@@ -20,6 +20,13 @@
         "name": "en",
         "url": "/api/v2/language/9/"
       }
+    },
+    {
+      "genus": "Pokémon Ratoncito",
+      "language": {
+        "name": "es",
+        "url": "/api/v2/language/7/"
+      }
     }
   ],
   "flavor_text_entries": [
@@ -32,6 +39,17 @@
       "version": {
         "name": "gold",
         "url": "/api/v2/version/4/"
+      }
+    },
+    {
+      "flavor_text": "Cuando juegan, se tocan las colas y emiten chispas.\nAl parecer, es una prueba de valor.",
+      "language": {
+        "name": "es",
+        "url": "/api/v2/language/7/"
+      },
+      "version": {
+        "name": "x",
+        "url": "/api/v2/version/23/"
       }
     }
   ]

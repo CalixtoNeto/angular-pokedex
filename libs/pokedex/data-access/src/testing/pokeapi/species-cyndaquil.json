@@ -20,6 +20,13 @@
         "name": "en",
         "url": "/api/v2/language/9/"
       }
+    },
+    {
+      "genus": "Pokémon Ratón Fuego",
+      "language": {
+        "name": "es",
+        "url": "/api/v2/language/7/"
+      }
     }
   ],
   "flavor_text_entries": [
@@ -32,6 +39,17 @@
       "version": {
         "name": "gold",
         "url": "/api/v2/version/4/"
+      }
+    },
+    {
+      "flavor_text": "Es tímido y siempre se enrosca como una pelota.\nSi es atacado, enciende su lomo para protegerse.",
+      "language": {
+        "name": "es",
+        "url": "/api/v2/language/7/"
+      },
+      "version": {
+        "name": "x",
+        "url": "/api/v2/version/23/"
       }
     }
   ]

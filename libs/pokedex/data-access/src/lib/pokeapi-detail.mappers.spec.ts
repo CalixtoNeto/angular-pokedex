@@ -15,8 +15,8 @@ import pichuSpecies from '../testing/pokeapi/species-pichu.json';
 import pikachuChain from '../testing/pokeapi/evolution-chain-10.json';
 import eeveeChain from '../testing/pokeapi/evolution-chain-67.json';
 
-const detail = (pokemon: unknown, species: unknown, chain: unknown) =>
-  toPokemonDetail(pokemon as PokemonDetailResponse, species as SpeciesResponse, chain as EvolutionChainResponse);
+const detail = (pokemon: unknown, species: unknown, chain: unknown, locale?: string) =>
+  toPokemonDetail(pokemon as PokemonDetailResponse, species as SpeciesResponse, chain as EvolutionChainResponse, locale);
 const ARTWORK = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
 
 describe('toPokemonDetail (contrato com a PokeAPI)', () => {
@@ -31,6 +31,7 @@ describe('toPokemonDetail (contrato com a PokeAPI)', () => {
   });
 
   it('traz espécie, descrição limpa, tipos, habilidades e grupos de ovo', () => {
+    expect(bulba.textLanguage).toBe('en');
     expect(bulba.genus).toBe('Seed Pokémon');
     expect(bulba.description).toBe('A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon.');
     expect(bulba.types).toEqual(['grass', 'poison']);
@@ -59,21 +60,45 @@ describe('toPokemonDetail (contrato com a PokeAPI)', () => {
   it('achata a cadeia de evolução por etapa, com a condição de cada uma', () => {
     expect(bulba.evolution).toEqual([
       [{ id: 1, name: 'bulbasaur', image: `${ARTWORK}/1.png`, condition: null }],
-      [{ id: 2, name: 'ivysaur', image: `${ARTWORK}/2.png`, condition: 'Lv. 16' }],
-      [{ id: 3, name: 'venusaur', image: `${ARTWORK}/3.png`, condition: 'Lv. 32' }],
+      [{ id: 2, name: 'ivysaur', image: `${ARTWORK}/2.png`, condition: { kind: 'level', level: 16 } }],
+      [{ id: 3, name: 'venusaur', image: `${ARTWORK}/3.png`, condition: { kind: 'level', level: 32 } }],
     ]);
   });
 
   it('evolução por amizade e por item', () => {
     const stages = detail(pichu, pichuSpecies, pikachuChain).evolution.map(stage => stage.map(s => [s.name, s.condition]));
-    expect(stages).toEqual([[['pichu', null]], [['pikachu', 'Friendship']], [['raichu', 'Thunder Stone']]]);
+    expect(stages).toEqual([
+      [['pichu', null]], [['pikachu', { kind: 'friendship' }]], [['raichu', { kind: 'item', item: 'thunder-stone' }]],
+    ]);
   });
 
   it('evoluções ramificadas ficam lado a lado na mesma etapa (Eevee)', () => {
     const stages = detail(bulbasaur, bulbasaurSpecies, eeveeChain).evolution;
     expect(stages[0]?.map(s => s.name)).toEqual(['eevee']);
     expect(stages[1]?.length).toBe(8);
-    expect(stages[1]?.find(s => s.name === 'vaporeon')?.condition).toBe('Water Stone');
+    expect(stages[1]?.find(s => s.name === 'vaporeon')?.condition).toEqual({ kind: 'item', item: 'water-stone' });
+  });
+});
+
+describe('toPokemonDetail no idioma do site', () => {
+  it('em espanhol, espécie e descrição vêm em espanhol', () => {
+    const bulba = detail(bulbasaur, bulbasaurSpecies, bulbasaurChain, 'es');
+    expect(bulba).toMatchObject({ textLanguage: 'es', genus: 'Pokémon Semilla' });
+    expect(bulba.description).toBe('Una rara semilla le fue plantada en el lomo al nacer. La planta brota y crece con este Pokémon.');
+  });
+
+  it('sem os textos em português na API, cai para o inglês e diz isso', () => {
+    expect(detail(bulbasaur, bulbasaurSpecies, bulbasaurChain, 'pt-BR')).toMatchObject({ textLanguage: 'en', genus: 'Seed Pokémon' });
+  });
+
+  it('usa o pt-br da API quando ele existe', () => {
+    const emPortugues = {
+      ...bulbasaurSpecies,
+      genera: [...bulbasaurSpecies.genera, { genus: 'Pokémon Semente', language: { name: 'pt-br' } }],
+      flavor_text_entries: [...bulbasaurSpecies.flavor_text_entries, { flavor_text: 'Uma semente.', language: { name: 'pt-br' } }],
+    };
+    expect(detail(bulbasaur, emPortugues, bulbasaurChain, 'pt-BR'))
+      .toMatchObject({ textLanguage: 'pt-BR', genus: 'Pokémon Semente', description: 'Uma semente.' });
   });
 });
 
@@ -91,12 +116,16 @@ describe('toPokemonDetail com dados incompletos', () => {
 });
 
 describe('evolutionCondition', () => {
+  // Dado, não texto: quem escreve "Lv. 36" ou "Nv. 36" é a interface, no idioma do site.
   it('nível, item, amizade e, sem detalhe conhecido, o gatilho', () => {
-    expect(evolutionCondition({ min_level: 36, item: null, min_happiness: null, trigger: { name: 'level-up' } })).toBe('Lv. 36');
+    expect(evolutionCondition({ min_level: 36, item: null, min_happiness: null, trigger: { name: 'level-up' } }))
+      .toEqual({ kind: 'level', level: 36 });
     expect(evolutionCondition({ min_level: null, item: { name: 'moon-stone' }, min_happiness: null, trigger: { name: 'use-item' } }))
-      .toBe('Moon Stone');
-    expect(evolutionCondition({ min_level: null, item: null, min_happiness: 160, trigger: { name: 'level-up' } })).toBe('Friendship');
-    expect(evolutionCondition({ min_level: null, item: null, min_happiness: null, trigger: { name: 'trade' } })).toBe('Trade');
+      .toEqual({ kind: 'item', item: 'moon-stone' });
+    expect(evolutionCondition({ min_level: null, item: null, min_happiness: 160, trigger: { name: 'level-up' } }))
+      .toEqual({ kind: 'friendship' });
+    expect(evolutionCondition({ min_level: null, item: null, min_happiness: null, trigger: { name: 'trade' } }))
+      .toEqual({ kind: 'trigger', trigger: 'trade' });
   });
 
   it('sem detalhe nenhum, não há condição (a primeira etapa)', () => {

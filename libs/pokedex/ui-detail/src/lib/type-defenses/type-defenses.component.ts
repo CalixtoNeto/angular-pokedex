@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { TypeDefenses } from '@pokedex/domain';
-import { formatMultiplier, titleCaseSlug } from '@pokedex/ui';
+import { formatMultiplier, typeLabel } from '@pokedex/ui';
 
 @Component({
   selector: 'app-type-defenses',
@@ -15,7 +15,7 @@ import { formatMultiplier, titleCaseSlug } from '@pokedex/ui';
             }
           </ul>
         } @else {
-          <p class="text-muted small">None</p>
+          <p class="text-muted small" i18n="No type in this group@@defenses.none">None</p>
         }
       </section>
     }
@@ -26,11 +26,11 @@ export class TypeDefensesComponent {
 
   protected readonly groups = computed(() => {
     const { weak, resistant, immune } = this.defenses();
-    const label = (list: typeof weak) => list.map(({ type, multiplier }) => ({ type, label: `${titleCaseSlug(type)} ${formatMultiplier(multiplier)}` }));
+    const label = (list: typeof weak) => list.map(({ type, multiplier }) => ({ type, label: `${typeLabel(type)} ${formatMultiplier(multiplier)}` }));
     return [
-      { key: 'weak', title: 'Weak to', items: label(weak) },
-      { key: 'resistant', title: 'Resistant to', items: label(resistant) },
-      { key: 'immune', title: 'Immune to', items: label(immune) },
+      { key: 'weak', title: $localize`:Attack types that deal extra damage@@defenses.weak:Weak to`, items: label(weak) },
+      { key: 'resistant', title: $localize`:Attack types that deal less damage@@defenses.resistant:Resistant to`, items: label(resistant) },
+      { key: 'immune', title: $localize`:Attack types that deal no damage@@defenses.immune:Immune to`, items: label(immune) },
     ];
   });
 }
