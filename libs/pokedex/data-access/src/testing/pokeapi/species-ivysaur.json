@@ -23,6 +23,13 @@
         "name": "en",
         "url": "/api/v2/language/9/"
       }
+    },
+    {
+      "genus": "Pokémon Semilla",
+      "language": {
+        "name": "es",
+        "url": "/api/v2/language/7/"
+      }
     }
   ],
   "flavor_text_entries": [
@@ -35,6 +42,17 @@
       "version": {
         "name": "red",
         "url": "/api/v2/version/1/"
+      }
+    },
+    {
+      "flavor_text": "Este Pokémon tiene un bulbo en el lomo. Dicen que,\nal absorber nutrientes, el bulbo se transforma en una\nflor grande.",
+      "language": {
+        "name": "es",
+        "url": "/api/v2/language/7/"
+      },
+      "version": {
+        "name": "x",
+        "url": "/api/v2/version/23/"
       }
     }
   ]

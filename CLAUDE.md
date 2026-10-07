@@ -1,7 +1,8 @@
 # Pokédex em Angular (monorepo Nx)
 
 App estático em Angular 22 (standalone, signals, sem zone.js): lista Pokémon por região e mostra o detalhe de
-cada um (stats, evoluções, raridade, fraquezas), a partir da PokeAPI.
+cada um (stats, evoluções, raridade, fraquezas), a partir da PokeAPI. Em inglês (`/`), português (`/pt/`) e
+espanhol (`/es/`).
 
 ## Antes de dar uma mudança por pronta
 
@@ -28,15 +29,30 @@ corrija o código, não o teste.
    `feature-*` (componentes smart).
 3. Resposta nova da PokeAPI: baixe do espelho `PokeAPI/api-data` e recorte só os campos usados.
 
+## Textos e idiomas
+
+i18n oficial do Angular (`@angular/localize`), no build: um bundle por idioma, configurado em `"i18n"` no
+`project.json` (o inglês é a origem e fica na raiz). A lista do seletor (`src/app/languages.ts`) tem de bater com ele.
+
+- Texto visível novo: em inglês, com id fixo. Template: `i18n="descrição@@area.chave"` (ou `i18n-placeholder`,
+  `i18n-aria-label`); TypeScript: `` $localize`:descrição@@area.chave:Texto` ``. O lint barra texto sem `i18n` ou sem id.
+- Depois, `npm run i18n:extract` e a tradução nos dois arquivos `src/locale/messages.{pt-BR,es}.xlf`. O build
+  falha se faltar uma.
+- O domínio guarda dado, não texto pronto ("Lv. 16" é `{ kind: 'level', level: 16 }`); quem escreve é a ui.
+- Números pelos pipes (`number`, `percent`), que seguem o `LOCALE_ID`. Nunca monte "0.7" com template string.
+- Textos da PokeAPI: o data-access escolhe o idioma pelo `LOCALE_ID`, com o inglês como reserva, e diz qual veio
+  (`textLanguage`). Texto que pode estar em outro idioma leva `lang` no HTML.
+- Os testes unitários rodam no idioma de origem (inglês); os outros idiomas são cobertos em `e2e/idiomas.spec.ts`.
+
 ## Libs e fronteiras (impostas pelo lint)
 
 | Lib | Tag | Pode importar | O que tem |
 |---|---|---|---|
 | `@pokedex/domain` | `type:domain` | nada | Modelo, `PokemonRepository` (contrato), `typeDefenses`, funções puras |
 | `@pokedex/data-access` | `type:data-access` | domain | `PokeApiPokemonRepository`, mapeamento, cache, `providePokeApi()` |
-| `@pokedex/ui`, `@pokedex/ui-detail` | `type:ui` | domain, ui | Componentes dumb: só `input()`/`output()`, sem `inject()` nem HTTP |
+| `@pokedex/ui`, `@pokedex/ui-detail` | `type:ui` | domain, ui | Componentes dumb: só `input()`/`output()`, sem `inject()` nem HTTP; nomes de tipos e seletor de idioma |
 | `@pokedex/feature-list`, `@pokedex/feature-detail` | `type:feature` | domain, ui | Componentes smart e stores; dependem do contrato, nunca da API |
-| app (`src/`) | `type:app` | todas | Rotas e `providePokeApi()`: o único lugar que escolhe a implementação |
+| app (`src/`) | `type:app` | todas | Rotas, `providePokeApi()` (o único lugar que escolhe a implementação) e os idiomas do site |
 
 - Estado em `signal`/`computed`; dados assíncronos com `rxResource` ou `toSignal`. Sem zone.js.
 - Componente dumb que precisa de dado novo ganha um `input()`; quem busca é a feature.

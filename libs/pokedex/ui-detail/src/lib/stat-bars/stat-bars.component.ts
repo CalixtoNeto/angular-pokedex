@@ -2,7 +2,12 @@ import { Component, computed, input } from '@angular/core';
 import { BaseStat, StatName, statTotal } from '@pokedex/domain';
 
 const LABELS: Record<StatName, string> = {
-  hp: 'HP', attack: 'Attack', defense: 'Defense', 'special-attack': 'Sp. Atk', 'special-defense': 'Sp. Def', speed: 'Speed',
+  hp: $localize`:Base stat, abbreviated@@stat.hp:HP`,
+  attack: $localize`:Base stat@@stat.attack:Attack`,
+  defense: $localize`:Base stat@@stat.defense:Defense`,
+  'special-attack': $localize`:Base stat, abbreviated@@stat.specialAttack:Sp. Atk`,
+  'special-defense': $localize`:Base stat, abbreviated@@stat.specialDefense:Sp. Def`,
+  speed: $localize`:Base stat@@stat.speed:Speed`,
 };
 
 // Poucos stats base passam de 180; acima disso a barra fica cheia.
@@ -21,7 +26,7 @@ const LOW_STAT = 60;
         </tr>
       }
       <tr class="total">
-        <th scope="row">Total</th>
+        <th scope="row" i18n="Sum of all base stats@@stat.total">Total</th>
         <td class="value">{{ total() }}</td>
         <td></td>
       </tr>
