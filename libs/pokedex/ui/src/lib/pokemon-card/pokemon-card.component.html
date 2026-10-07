@@ -4,7 +4,7 @@
     <h3 class="card-title">{{ pokemon().name | titlecase }}</h3>
     <div class="types">
       @for (type of pokemon().types; track type) {
-        <span class="badge rounded-pill bg-{{ type }}">{{ type | titlecase }}</span>
+        <span class="badge rounded-pill bg-{{ type }}">{{ type | typeLabel }}</span>
       }
     </div>
     <img [src]="pokemon().image" [alt]="pokemon().name" class="artwork" loading="lazy" decoding="async" />

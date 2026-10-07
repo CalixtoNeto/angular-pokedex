@@ -20,6 +20,13 @@
         "name": "en",
         "url": "/api/v2/language/9/"
       }
+    },
+    {
+      "genus": "Pokémon Genético",
+      "language": {
+        "name": "es",
+        "url": "/api/v2/language/7/"
+      }
     }
   ],
   "flavor_text_entries": [
@@ -32,6 +39,17 @@
       "version": {
         "name": "red",
         "url": "/api/v2/version/1/"
+      }
+    },
+    {
+      "flavor_text": "Fue creado por un científico tras años de horribles\nexperimentos de ingeniería genética.",
+      "language": {
+        "name": "es",
+        "url": "/api/v2/language/7/"
+      },
+      "version": {
+        "name": "x",
+        "url": "/api/v2/version/23/"
       }
     }
   ]

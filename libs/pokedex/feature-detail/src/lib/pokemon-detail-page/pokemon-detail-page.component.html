@@ -1,14 +1,15 @@
-@if (detail(); as pokemon) {
+@if (page(); as page) {
+  @let pokemon = page.pokemon;
   <article class="pokemon-detail">
     <header class="detail-header bg-{{ pokemon.types[0] }}">
-      <a routerLink="/" class="back" aria-label="Back">←</a>
+      <a routerLink="/" class="back" aria-label="Back" i18n-aria-label="Link back to the list@@detail.back">←</a>
       <div class="title-row">
         <h1>{{ pokemon.name | titlecase }}</h1>
-        <span class="number">{{ number() }}</span>
+        <span class="number">{{ page.number }}</span>
       </div>
       <div class="types">
         @for (type of pokemon.types; track type) {
-          <span class="badge rounded-pill bg-{{ type }}">{{ type | titlecase }}</span>
+          <span class="badge rounded-pill bg-{{ type }}">{{ type | typeLabel }}</span>
         }
         <app-rarity-badge [rarity]="pokemon.rarity" />
       </div>
@@ -41,7 +42,7 @@
             <app-evolution-chain [stages]="pokemon.evolution" />
           }
           @case ('defenses') {
-            <app-type-defenses [defenses]="defenses()" />
+            <app-type-defenses [defenses]="page.defenses" />
           }
         }
       </div>
@@ -49,9 +50,9 @@
   </article>
 } @else if (request.error()) {
   <div class="container my-5 text-center">
-    <p>Pokémon not found.</p>
-    <a routerLink="/">Back to the Pokédex</a>
+    <p i18n="@@detail.notFound">Pokémon not found.</p>
+    <a routerLink="/" i18n="@@detail.backToList">Back to the Pokédex</a>
   </div>
 } @else {
-  <p class="container my-5 text-center text-muted">Loading…</p>
+  <p class="container my-5 text-center text-muted" i18n="@@detail.loading">Loading…</p>
 }

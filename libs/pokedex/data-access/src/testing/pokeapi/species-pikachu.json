@@ -23,6 +23,13 @@
         "name": "en",
         "url": "/api/v2/language/9/"
       }
+    },
+    {
+      "genus": "Pokémon Ratón",
+      "language": {
+        "name": "es",
+        "url": "/api/v2/language/7/"
+      }
     }
   ],
   "flavor_text_entries": [
@@ -35,6 +42,17 @@
       "version": {
         "name": "red",
         "url": "/api/v2/version/1/"
+      }
+    },
+    {
+      "flavor_text": "Levanta su cola para vigilar los alrededores. A veces,\npuede ser alcanzado por un rayo en esa pose.",
+      "language": {
+        "name": "es",
+        "url": "/api/v2/language/7/"
+      },
+      "version": {
+        "name": "x",
+        "url": "/api/v2/version/23/"
       }
     }
   ]
