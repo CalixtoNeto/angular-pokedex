@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Histórico completo: a Sonar usa o blame para saber o que é código novo.
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
@@ -22,6 +25,19 @@ jobs:
         run: npm run lint
       - name: Testes unitários com cobertura mínima por arquivo
         run: npm run test:ci
+      # Sem o segredo (fork ou Sonar ainda não configurada), a análise é pulada em vez de falhar.
+      - name: SonarQube Cloud configurado?
+        id: sonar
+        run: echo "configurado=${{ secrets.SONAR_TOKEN != '' }}" >> "$GITHUB_OUTPUT"
+      - name: Análise do SonarQube Cloud (qualidade e cobertura)
+        if: steps.sonar.outputs.configurado == 'true'
+        uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          # Falha o job se o Quality Gate reprovar o código novo.
+          args: >
+            -Dsonar.qualitygate.wait=true
       - name: Build de produção
         run: npm run build
       - name: Chromium para o Playwright

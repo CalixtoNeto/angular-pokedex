@@ -43,6 +43,9 @@
     ],
     "@angular/build:unit-test": {
       "cache": true,
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectName}"
+      ],
       "inputs": [
         "default",
         "^production"
@@ -51,7 +54,8 @@
         "ci": {
           "coverage": true,
           "coverageReporters": [
-            "text-summary"
+            "text-summary",
+            "lcov"
           ],
           "coverageThresholds": {
             "perFile": true,
